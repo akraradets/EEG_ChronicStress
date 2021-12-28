@@ -130,5 +130,5 @@ dmypy.json
 
 
 # Project Git Ignore
-1.5.1-Rapid/data/*
-1.5-Convert/data/*
+1-Stress/data/*
+2-ChronicStress/data/*
