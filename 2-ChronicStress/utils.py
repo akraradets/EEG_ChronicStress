@@ -5,8 +5,7 @@ import pickle
 import os
 
 def clear_cache():
-    os.remove("cache/EEG_audio.pickle")
-    os.remove("cache/EEG_image.pickle")
+    os.remove("cache/PSS.pickle")
 
 
 def save(data, filename):

@@ -132,3 +132,5 @@ dmypy.json
 # Project Git Ignore
 1-Stress/data/*
 2-ChronicStress/data/*
+2-ChronicStress/cache/*
+2-ChronicStress/export/*

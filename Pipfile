@@ -10,6 +10,7 @@ mne = "*"
 matplotlib = "*"
 tqdm = "*"
 sklearn = "*"
+ipywidgets = "*"
 
 [dev-packages]
 ipykernel = "*"
