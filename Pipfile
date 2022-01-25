@@ -11,6 +11,7 @@ matplotlib = "*"
 tqdm = "*"
 sklearn = "*"
 ipywidgets = "*"
+nibabel = "*"
 
 [dev-packages]
 ipykernel = "*"
