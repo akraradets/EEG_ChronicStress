@@ -91,31 +91,22 @@
 %%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
 %%=============================================================%%
 
-\author{\fnm{Akraradet} \sur{Sinsamersuk}}\email{akraradets@gmail.com}
-
 \author{\fnm{Rattaphong} \sur{Laoharungpisit}}\email{laoharungpisit.r@gmail.com}
-
+\author{\fnm{Akraradet} \sur{Sinsamersuk}}\email{akraradets@gmail.com}
 \equalcont{These authors contributed equally to this work.}
 
 \author{\fnm{Chaklam} \sur{Silpasuwanchai}}\email{chaklam@ait.ac.th}
-
 \author{\fnm{Matthew} \sur{Dailey}}\email{mdailey@ait.ac.th}
-
 \author{\fnm{Attaphongse} \sur{Taparugssanagorn}}\email{attaphongset@ait.ac.th}
-
-
 \affil{\orgdiv{Center for Health and Wellness Technologies}, {\orgdiv{School of Engineering and Technology}, \orgname{Asian Institute of Technology}}}
 %\orgaddress{\street{Street}, \city{City}, \postcode{100190}, \state{State}, \country{Country}}}
-
 %\affil[2]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{10587}, \state{State}, \country{Country}}}
-
 %\affil[3]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{610101}, \state{State}, \country{Country}}}
 
 
 
 % https://www.verywellmind.com/chronic-stress-3145104
 \abstract{Chronic stress is a prolonged and constant feeling of stress which could lead to depression and anxiety; therefore, a self-diagnosing tool can help notify an individual beforehand. EEG potential has been successful as a mean of prediction human emotion, but studies on EEG and chronic stress are limited. We recorded rest-state EEG and Perceived Stress Scale (PSS) score from 55 participants. Five frequency bands and asymmetry are extracted as features from the rest-state EEG. A feature selection procedure was performed using a t-test and feature importance scores from five classifiers. A RBF-SVM achieved a 10-cv score over 0.9 using eight different frequency bands, electrodes, and asymmetries namely, $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$. This paper shows the empirical method of feature selection and confirms that EEG can be used in the chronic stress classification.}
-
 
 \keywords{Long-term stress, Chronic stress, Electroencephalography}
 %%\pacs[JEL Classification]{D8, H51}
@@ -129,8 +120,6 @@ Stress is an unavoidable life phenomenon that can generate temporary discomfort 
 Several studies that have developed techniques to assess chronic stress using subjective psychological self-report questionnaires such as the Perceived Stress Scale (PSS) \cite{Cohen-1983}. This approach is practical for capturing signs of stress over a long period, but the result could be biased since participants must reconstruct their feelings in the past, and they may hide their real feelings due to personal circumstances. As a result, genuine stress may out come to light. Recently, objective physiological assessments based on bio-markers such as electroencephalography (EEG) signals have emerged as alternative means to detect mental states including acute stress \cite{Awang2011, Hu2015}. However, the relationship between chronic stress and EEG signals has not been widely investigated.
 
 The aim of this study is to identify which EEG features are important contributors to predictive classification accuracy. We performed a study with a total of 55 participants, whose rest-state EEG measurement were recorded for ten minutes with eyes closed. The label of each participant was calculated from the statistics of their PSS score. An initial 133 features including five EEG frequency bands ($\delta$, $\theta$, $\alpha$, $\beta$, $\gamma$), two custom bands ($\text{slow}$, $\beta_{\text{low}}$), one engineered band ($\gamma_{\text{relative}}$) from 16 electrodes and five asymmetries of Alpha and Beta band are extracted from the recorded EEG. We selected the 25 most important features using t-test. We ranked the 25 features with six methods. The first five are based on fice classifiers' feature importance scores. The five classifiers are Logistic Regression (LR), Linear Discriminant Analysis (LDA), AdaBoost (AB), Gradient Boosting (GB), and Random Forest (RF). The sixth ranking was created by combining the first five ranked using ranked voting scheme. Finally, 10-CV score is used to verify the rank and t-Distributed Stochastic Neighbor Embedding (t-SNE) is used for visualizing the similarity of Stress and Non-Stress groups given a set of features.
-
-sdfsdf  asdkasdjjaasnmxcnv s;df
 
 % (4) What we achieve
 
@@ -203,7 +192,7 @@ This paper shows the empirical method of feature selection by combining t-test r
 %where alpha and beta can be used as signs of mental stress \cite{Puterman2011} induced by particular stimuli such as mental arithmetic tasks \cite{Vanitha-2016, Alshargie-2018} and Stroop color-word test \cite{Hou-2015, Masood-2019}.
 
 \section{Related work} \label{sec2}
-Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), which is comprised of the antagonistic regulation of the sympathetic (SNS) as well as the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have become an alternative technique to analyze mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency band\cite{Kulkarni2020}, where each of the frequency bands can be utilized to differentiate between different brain states \cite{Alshargie-2018}. A changes of power in $\beta$ band is associated with alertness, whereas $\theta$ band occurred throughout the sleep state, and $\alpha$ band rose with relaxation \cite{Wang2014}. Recently, some studies used EEG signals conducted with various signals processing and machine learning methods to detect stress. 
+Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), which is comprised of the antagonistic regulation of the sympathetic (SNS) as well as the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have become an alternative technique to analyze mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency band\cite{Kulkarni2020}, where each of the frequency bands can be utilized to differentiate between different brain states \cite{Alshargie-2018}. A changes of power in $\beta$ band is associated with alertness, whereas $\theta$ band occurred throughout the sleep state, and $\alpha$ band rose with relaxation \cite{Wang2014}. Recently, some studies used EEG signals conducted with various signals processing and machine learning methods to detect stress. sss
 
 Several studies have demonstrated the relationship between stress and EEG signals and show that EEG can be used as an input variable in both short-term and long-term stress analysis. In EEG, the $\alpha$ band is commonly used in stress assessment because it is increasing during the relaxation situation. On the other hand, it is decreasing during stress condition \cite{Alshargie-2016}. In contrast, $\alpha$ is not the only band that can indicate mental stress. The $\beta$ band has been found as a sign of mental stress due to an increase of power in $\beta$ band associated with an increase in alertness when performing cognitive tasks. The relationship between stress and $\beta$ band at the anterior temporal lobe has demonstrated when stress-inducing pictures were shown \cite{Seo2010, Awang2011, Hamid2010}. Meanwhile, theta band was used to assess stress during mental arithmetic tasks \cite{Grtner2015}. Moreover, the relative gamma band has been proposed as a biomarker for the identification of stress \cite{Arsalan2019}.
 
@@ -216,19 +205,21 @@ Previous studies have demonstrated the feasibility of using EEG for chronic stre
 A total of 55 healthy participants (30 male, 25 female) with ages ranging from 21 to 45 years $(\text{Mean} = 26, SD = 4.84)$ participated in the study. The participants were informed to avoid food and drink with caffeine as well as conditioners, hair creams, sprays, or styling gels on the day of the experiment. Prior to the experiment, all participants gave consent in writing before completing the questionnaire and having their EEG recorded.
 
 \subsection{Data Acquisition}\label{subsec2}
-The EEG acquisition phase of the experiment was conducted in a room with a controlled environment. An EEG Electrode Cap Kit was used to record EEG signals of the participants at 16 active electrodes, namely $\text{FP1}$, $\text{FP2}$, $\text{F3}$, $\text{F4}$, $\text{F7}$, $\text{F8}$, $\text{C3}$, $\text{C4}$, $\text{T3}$, $\text{T4}$, $\text{T5}$, $\text{T6}$, $\text{P3}$, $\text{P4}$, $\text{O1}$, and $\text{O2}$, with two reference electrodes according to the 10 - 20 system EEG electrode placement with the sampling rate of 125 Hz. The experimental procedure showed in Figure \ref{fig:procedure}. All participants were initially instructed regarding the experimental procedure and signed consent form. The experiment was carried out after each participant taking the PSS questionnaire. Each participant was placed comfortably in a chair and asked to close their eyes for five minutes while keeping their head motionless to eliminate movement artifacts. The closed-eyes condition was utilized because the particular stimuli can affect the physical, emotional, cognitive, or behavior of an individual. Thus, the eyes closed condition is a better choice without involving stress induction for chronic stress classification. \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
- 
-In this study, PSS-10 questionnaire was used for assessing and labeling to evaluate the stress of each participant. The questionnaire has ten questions, which each question asks about the frequency of stress in the last month. Each question is answered on a scale of 0, which indicate that the incident has never happened, to 4, which indicate that it occurs frequently. All participants were categorized into three groups based on PSS score, as stress, non-stress, and neutral groups. Therefore, a threshold was chosen based on the following equation:
+
+The EEG acquisition phase of the experiment was conducted in a room with a controlled environment. An EEG Electrode Cap Kit was used to record EEG signals of the participants at 16 active electrodes, namely $\text{FP1}$, $\text{FP2}$, $\text{F3}$, $\text{F4}$, $\text{F7}$, $\text{F8}$, $\text{C3}$, $\text{C4}$, $\text{T3}$, $\text{T4}$, $\text{T5}$, $\text{T6}$, $\text{P3}$, $\text{P4}$, $\text{O1}$, and $\text{O2}$, with two reference electrodes according to the electrode locations of International 10 - 20 system for EEG (Figure~\ref{fig:activeelectrode}) with a sampling rate of 125 Hz. The experimental procedure is shown in Figure~\ref{fig:procedure}. All participants were initially instructed regarding the experimental procedure, signed consent form, then took the PSS questionnaire. Each participant was placed comfortably in a chair and asked to close their eyes for 10 minutes while keeping their head motionless to eliminate movement artifacts. The closed-eyes condition was utilized to simplify data processing. Previous research has found that chronic stress can be classified without stress induction \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
+% The closed-eyes condition was utilized because the particular stimuli can affect the physical, emotional, cognitive, or behavior of an individual. Thus, the eyes closed condition is a better choice without involving stress induction for chronic stress classification. \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
+
+In this study, the PSS-10 questionnaire was used to assessing participants' stress levels and classify them. The questionnaire has 10 questions, each of which asks about the frequency of stress in the last month. Each question is answered on a scale of 0, which indicates that the incident never happened, to 4, which indicates that it occurs frequently. All participants were categorized into three groups based on their PSS scores, as either stressed, non-stressed, or neutral. PSS thresholds were chosen as
 
 \begin{equation} \label{eq:1}
    T_{u} =\mu + \frac{\sigma}{2}
 \end{equation}
 
 \begin{equation} \label{eq:2}
-   T_{l} =\mu - \frac{\sigma}{2}
+   T_{l} =\mu - \frac{\sigma}{2},
 \end{equation}
 
-where $\mu$ represent the mean, $\sigma$ represent standard deviation of the PSS scores, $T_{u}$ is the upper threshold and $T_{l}$ is the lower threshold. Any participants with PSS score lower than $T_{l}$ is in non-stressed group, higher than $T_{u}$ is in stressed group, and others are in neutral group.
+where $\mu$ is the mean of PSS scores and $\sigma$ is the standard deviation of the PSS scores overs all 55 participants, $T_{u}$ is an upper threshold and $T_{l}$ is a lower threshold. Any participants with PSS score lower than $T_{l}$ are classified as non-stressed, and those with PSS scores higher than $T_{u}$ are classified as stressed. Others are classified as neutral.
 
 \begin{figure}[h!]
   \centering
@@ -237,15 +228,25 @@ where $\mu$ represent the mean, $\sigma$ represent standard deviation of the PSS
   \label{fig:procedure}
 \end{figure}
 
-%\begin{figure}[h!]
- % \centering
-  %\caption{Brain Location adopted according to the 10-20 system}
-  %\includegraphics[width=0.5\textwidth]{Electrodeplacement.png}
-  %\label{fig:activeelectrode}
-%\end{figure}
+% \begin{figure}[htpb]
+%     \centering
+%     \includegraphics[width=\textwidth,height=6cm,keepaspectratio=true]{AFM_Wikipedia}
+%     \caption{
+%         Sketch of the functionality principle of an AFM, from \cite{WikipediaEN:AFM}. The laser beam hits the cantilever. As the cantilever is bended because of the interaction forces of the tip with the sample the reflection angle changes. This change is recognized by the photo diode and translated into a picture by the detector.
+%     }
+%     \label{fig:basics AFM sketch}
+% \end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \caption{The electrode locations of International 10-20 system for EEG recording from \cite{wiki:10-20}}
+  \includegraphics[width=0.5\textwidth]{Electrodeplacement.png}
+  \label{fig:activeelectrode}
+\end{figure}
 
 \subsection{Feature Extraction}\label{method:featureExtraction}
-The recorded five-minute rest-state EEG is segmented into 20 smaller records (15 seconds each). For each records, the five EEG frequency bands were obtained using \texttt{psd\_welch} function from the \texttt{mne} library. The frequency bands namely, delta (1–3 Hz), theta (4–7 Hz), alpha (8–12 Hz), beta (13–30 Hz), gamma (25–43 Hz), slow (4–13 Hz), and low beta (13–17 Hz) were computed from every electrode. The ratio of gamma to slow bands was used to calculate a Relative Gamma (\text{RG}). Moreover, there were five Alpha and Beta asymmetries determined. The following formulae were used to compute the alpha asymmetries:
+
+The first five minutes of the rest-state EEG signals were segmented into 20 smaller records (15 seconds each). For each record, the five EEG frequency bands were obtained using the \texttt{psd\_welch} function from in the \texttt{mne} library. The function calculates power spectral density (PSD) of multiple smaller windows and average them to get a smoother result. The frequency bands, namely, $\delta$ (1-3 Hz), $\theta$ (4-7 Hz), $\alpha$ (8-12 Hz), $\beta$ (13-30 Hz), $\gamma$ (25-43 Hz), slow (4-13 Hz), and $\beta_{\text{low}}$ (13-17 Hz) were computed from each electrode. We did not perform any other preprocessing. The ratio of gamma to slow bands was used to calculate a $\gamma_{\text{relative}}$. Moreover, there were five Alpha and Beta asymmetries determined. The following formulae were used to compute the alpha asymmetries:
 
 \begin{equation} \label{eq:3}
    \alpha_{f} =\frac{ \text{F4}_{\alpha} - \text{F3}_{\alpha} }{ \text{F4}_{\alpha} + \text{F3}_{\alpha} }
@@ -259,7 +260,7 @@ The recorded five-minute rest-state EEG is segmented into 20 smaller records (15
    \alpha_{a} ={\alpha_{f}+\alpha_{t}}
 \end{equation}
 
-where $\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicates frontal, temporal, and alpha asymmetries respectively and $\text{channel}_\alpha$ denotes the power spectral density of alpha at each electrode. Beta asymmetry was determined at the frontal and temporal in the same procedure.
+$\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicate frontal, temporal, and $\alpha$ asymmetries, respectively, and $\text{channel}_\alpha$ denotes the PSD of $\alpha$ at each electrode. $\beta$ asymmetry was computed over the frontal and temporal region using the same procedure:
 
 \begin{equation} \label{eq:6}
     \beta_{f} =\frac{ \text{F4}_{\beta} - \text{F3}_{\beta} }{ \text{F4}_{\beta} + \text{F3}_{\beta} }
@@ -269,9 +270,9 @@ where $\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicates frontal, temporal, a
     \beta_{t} =\frac{ \text{T4}_{\beta} - \text{T3}_{\beta} }{ \text{T4}_{\beta} + \text{T3}_{\beta} }
 \end{equation}
 
-where $\beta_{f}$, and $\beta_{t}$ indicates frontal, temporal asymmetries of beta and $\text{channel}_\beta$ denotes the power spectral density of beta at each electrode.
+$\beta_{f}$ and $\beta_{t}$ indicate frontal and temporal asymmetries of the $\beta$ band, and $\text{channel}_\beta$ denotes the PSD of $\beta$ at each electrode.
 
-In total, number of extracted features is $(16 \times 8) + 5 = 133$
+In total, the number of extracted features is $(16 \times 8) + 5 = 133$.
 
 \subsection{Feature Selection}\label{sec:feature_selection}
 The data is segmented into 15 seconds long (20 samples from each participant) followed by the feature extraction process. The data is then normalized using the following equation;
@@ -339,7 +340,7 @@ The independent sample t-test with $p < .001$ was used to select feature in this
 
 \begin{table}[h!]
 \caption{Results for the t-test on various frequency bands.}
-\scalebox{0.76}{
+\scalebox{0.75}{
 \begin{tabular}{ccccccccc}
 \hline
 \textbf{}                            & \multicolumn{8}{c}{\textbf{Frequency bands}}                                                                                                                                                                      \\
@@ -759,7 +760,7 @@ In conclusion, the rest-state EEG can be used to classify chronic stress. The cl
 \centering
 \caption{The 10-CV score of each classifier when using $\text{Rank}_{\text{LDA}}$ as a rank.}
 \label{tab:cv_lda_apen}
-\scalebox{0.69}{
+\scalebox{0.68}{
 \begin{tabular}{r|cccccccc}
 \hline
  No. &    $\text{Rank}_{\text{LDA}}$ &  score &                      SVM &                       LR &                       GB &                      ADA &                       RF &                      LDA \\
@@ -922,7 +923,7 @@ In conclusion, the rest-state EEG can be used to classify chronic stress. The cl
 \centering
 \caption{The 10-CV score of each classifier when using $\text{Rank}_{\text{Ensemble}}$ as a rank.}
 \label{tab:cv_ensemble_apen}
-\scalebox{0.69}{
+\scalebox{0.67}{
 \begin{tabular}{r|cccccccc}
 \hline
  No. & $\text{Rank}_{\text{Ensemble}}$ &  score &                      SVM &                       LR &                       GB &                      ADA &                       RF &                      LDA \\
