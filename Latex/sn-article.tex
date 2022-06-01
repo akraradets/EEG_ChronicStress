@@ -92,6 +92,7 @@
 %%=============================================================%%
 
 \author{\fnm{Rattaphong} \sur{Laoharungpisit}}\email{laoharungpisit.r@gmail.com}
+\equalcont{These authors contributed equally to this work.}
 \author{\fnm{Akraradet} \sur{Sinsamersuk}}\email{akraradets@gmail.com}
 \equalcont{These authors contributed equally to this work.}
 
@@ -106,7 +107,7 @@
 
 
 % https://www.verywellmind.com/chronic-stress-3145104
-\abstract{Chronic stress is a prolonged and constant feeling of stress which could lead to depression and anxiety; therefore, a self-diagnosing tool can help notify an individual beforehand. EEG potential has been successful as a mean of prediction human emotion, but studies on EEG and chronic stress are limited. We recorded rest-state EEG and Perceived Stress Scale (PSS) score from 55 participants. Five frequency bands and asymmetry are extracted as features from the rest-state EEG. A feature selection procedure was performed using a t-test and feature importance scores from five classifiers. A RBF-SVM achieved a 10-cv score over 0.9 using eight different frequency bands, electrodes, and asymmetries namely, $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$. This paper shows the empirical method of feature selection and confirms that EEG can be used in the chronic stress classification.}
+\abstract{Chronic stress is a prolonged and constant feeling of stress that could lead to depression and anxiety. It would be useful to have a self-diagnosing tool to help notify individuals before chronic stress becomes unmanageable. EEG analysis has proven effective as a means of human emotion prediction, but studies linking EEG analysis with and chronic stress are limited. To fill this gap, we recorded rest-state EEG and perceived stress scale (PSS) scores for 55 participants. Five frequency bands (delta, theta, alpha, beta, and gamma) and lateral asymmetry between electrode pairs calculated for the alpha and beta bands are extracted as features from the rest-state EEG. A feature selection procedure was performed using a t-tests and feature importance scores based on five classifiers. A RBF SVM achieved a 10-cv score over 0.9 using eight different combinations of frequency bands, electrodes, and asymmetries, namely, $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$. This paper shows that data-driven feature selection for EEG signals can yield accurate chronic stress classifiers.}
 
 \keywords{Long-term stress, Chronic stress, Electroencephalography}
 %%\pacs[JEL Classification]{D8, H51}
@@ -117,14 +118,14 @@
 \section{Introduction} \label{sec1}
 Stress is an unavoidable life phenomenon that can generate temporary discomfort as well as long-term consequences. Stress can have damaging effects on the mental health of individuals and can be categorized into acute (short-term) and chronic (long-term) occurrence \cite{Khosrowabadi-2011}, where acute stress is usually not a health risk, while the persistence of stress for a longer duration becomes chronic \cite{Khosrowabadi-2011}, which can lead to a state of depression, anxiety, and other possibly life-threatening issues. Chronic stress also affects the human body at different levels ranging from skin conditions, eating habits, inadequate sleeping to decision-making \cite{Thoits2010, Garg2001, Adam2007} and can be a better predictor of depressive symptoms as compared to acute stress \cite{McGonagle1990}. Early detection of chronic stress can therefore reduce the risk of physical and mental illness if the stress is identified around the individual undertake appropriate stress relief therapies. 
 
-Several studies that have developed techniques to assess chronic stress using subjective psychological self-report questionnaires such as the Perceived Stress Scale (PSS) \cite{Cohen-1983}. This approach is practical for capturing signs of stress over a long period, but the result could be biased since participants must reconstruct their feelings in the past, and they may hide their real feelings due to personal circumstances. As a result, genuine stress may out come to light. Recently, objective physiological assessments based on bio-markers such as electroencephalography (EEG) signals have emerged as alternative means to detect mental states including acute stress \cite{Awang2011, Hu2015}. However, the relationship between chronic stress and EEG signals has not been widely investigated.
+Several studies that have developed techniques to assess chronic stress using subjective psychological self-report questionnaires such as the Perceived Stress Scale (PSS) \cite{Cohen-1983}. This approach is practical for capturing signs of stress over a long period, but the result could be biased since participants must reconstruct their feelings in the past, and they may hide their real feelings due to personal circumstances. As a result, genuine stress may not come to light. Recently, objective physiological assessments based on bio-markers such as electroencephalography (EEG) signals have emerged as alternative means to detect mental states including acute stress \cite{Awang2011, Hu2015}. However, the relationship between chronic stress and EEG signals has not been widely investigated.
 
-The aim of this study is to identify which EEG features are important contributors to predictive classification accuracy. We performed a study with a total of 55 participants, whose rest-state EEG measurement were recorded for ten minutes with eyes closed. The label of each participant was calculated from the statistics of their PSS score. An initial 133 features including five EEG frequency bands ($\delta$, $\theta$, $\alpha$, $\beta$, $\gamma$), two custom bands ($\text{slow}$, $\beta_{\text{low}}$), one engineered band ($\gamma_{\text{relative}}$) from 16 electrodes and five asymmetries of Alpha and Beta band are extracted from the recorded EEG. We selected the 25 most important features using t-test. We ranked the 25 features with six methods. The first five are based on fice classifiers' feature importance scores. The five classifiers are Logistic Regression (LR), Linear Discriminant Analysis (LDA), AdaBoost (AB), Gradient Boosting (GB), and Random Forest (RF). The sixth ranking was created by combining the first five ranked using ranked voting scheme. Finally, 10-CV score is used to verify the rank and t-Distributed Stochastic Neighbor Embedding (t-SNE) is used for visualizing the similarity of Stress and Non-Stress groups given a set of features.
+The aim of this study is to identify which EEG features are important contributors to predictive classification accuracy. We performed a study with a total of 55 participants, whose rest-state EEG measurement were recorded for ten minutes with eyes closed. The label of each participant was calculated from the statistics of their PSS score. An initial 133 features including five EEG frequency bands ($\delta$, $\theta$, $\alpha$, $\beta$, $\gamma$), two custom bands ($\text{slow}$, $\beta_{\text{low}}$), one engineered band ($\gamma_{\text{relative}}$) from 16 electrodes and five asymmetries of Alpha and Beta band are extracted from the recorded EEG. We selected the 25 most important features using t-test. We ranked the 25 features with six methods. The first five are based on five classifiers' feature importance scores. The five classifiers are Logistic Regression (LR), Linear Discriminant Analysis (LDA), AdaBoost (AB), Gradient Boosting (GB), and Random Forest (RF). The sixth ranking was created by combining the first five ranked using ranked voting scheme. Finally, 10-CV score is used to verify the rank and t-Distributed Stochastic Neighbor Embedding (t-SNE) is used for visualizing the similarity of Stress and Non-Stress groups given a set of features.
 
 % (4) What we achieve
 
 \begin{figure}[h!]
-    \caption{10-CV score of both SVM and LR classifier when using different rank at different number of features. A line plot show the trend of 10-CV when increasing the number of feature based on ranks. The bar plot show the 10-CV score at the number of feature, 6 for SVM and 9 for LR.}
+    \caption{10-CV score of both SVM and LR classifier when using different rank at different number of features. A line plot show the trend of 10-CV when increasing the number of feature based on ranks. The bar plot shows the 10-CV score at the number of feature, 6 for SVM and 9 for LR.}
     \label{fig:cv_svm-lr}
     
     \centering
@@ -159,7 +160,7 @@ The aim of this study is to identify which EEG features are important contributo
 We found that the SVM with Radial Basis Function (RBF) kernel achieves close or up to 0.9 10-CV score when using top six features from $\text{Rank}_{\text{LR}}$ and $\text{Rank}_{\text{Ensemble}}$ as shown in Figure~\ref{fig:cv_svm}. Top eight features in $\text{Rank}_{\text{Ensemble}}$ are $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$. In addition, t-SNE seems to suggest that top six $\text{Rank}_{\text{Ensemble}}$ are a better representation of a chronic stress when comparing to the $\text{Rank}_{\text{Baseline}}$ as shown in Figure~\ref{fig:t-SNE_baseline-ensemble}.
 
 \begin{figure}[h!]
-    \caption{The top six features from $\text{Rank}_{\text{Baseline}}$ and $\text{Rank}_{\text{Ensemble}}$ plot in t-SNE space. Color green and red indicate the group Non-stress and Stress respectively and shape dot and x indicates the classification result with rbf-SVM. }
+    \caption{The top six features from $\text{Rank}_{\text{Baseline}}$ and $\text{Rank}_{\text{Ensemble}}$ plot in t-SNE space. Color green and red indicate the group Non-stress and Stress respectively and shape dot and x indicates the classification result with RBF-SVM. }
     \label{fig:t-SNE_baseline-ensemble}
     
     \centering
@@ -192,7 +193,7 @@ This paper shows the empirical method of feature selection by combining t-test r
 %where alpha and beta can be used as signs of mental stress \cite{Puterman2011} induced by particular stimuli such as mental arithmetic tasks \cite{Vanitha-2016, Alshargie-2018} and Stroop color-word test \cite{Hou-2015, Masood-2019}.
 
 \section{Related work} \label{sec2}
-Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), which is comprised of the antagonistic regulation of the sympathetic (SNS) as well as the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have become an alternative technique to analyze mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency band\cite{Kulkarni2020}, where each of the frequency bands can be utilized to differentiate between different brain states \cite{Alshargie-2018}. A changes of power in $\beta$ band is associated with alertness, whereas $\theta$ band occurred throughout the sleep state, and $\alpha$ band rose with relaxation \cite{Wang2014}. Recently, some studies used EEG signals conducted with various signals processing and machine learning methods to detect stress. sss
+Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), which is composed of the antagonistic regulation of the sympathetic (SNS) as well as the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have become an alternative technique to analyze mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency band\cite{Kulkarni2020}, where each of the frequency bands can be utilized to differentiate between different brain states \cite{Alshargie-2018}. A change of power in $\beta$ band is associated with alertness, whereas $\theta$ band occurred throughout the sleep state, and $\alpha$ band rose with relaxation \cite{Wang2014}. Recently, some studies used EEG signals conducted with various signals processing and machine learning methods to detect stress.
 
 Several studies have demonstrated the relationship between stress and EEG signals and show that EEG can be used as an input variable in both short-term and long-term stress analysis. In EEG, the $\alpha$ band is commonly used in stress assessment because it is increasing during the relaxation situation. On the other hand, it is decreasing during stress condition \cite{Alshargie-2016}. In contrast, $\alpha$ is not the only band that can indicate mental stress. The $\beta$ band has been found as a sign of mental stress due to an increase of power in $\beta$ band associated with an increase in alertness when performing cognitive tasks. The relationship between stress and $\beta$ band at the anterior temporal lobe has demonstrated when stress-inducing pictures were shown \cite{Seo2010, Awang2011, Hamid2010}. Meanwhile, theta band was used to assess stress during mental arithmetic tasks \cite{Grtner2015}. Moreover, the relative gamma band has been proposed as a biomarker for the identification of stress \cite{Arsalan2019}.
 
@@ -275,55 +276,50 @@ $\beta_{f}$ and $\beta_{t}$ indicate frontal and temporal asymmetries of the $\b
 In total, the number of extracted features is $(16 \times 8) + 5 = 133$.
 
 \subsection{Feature Selection}\label{sec:feature_selection}
-The data is segmented into 15 seconds long (20 samples from each participant) followed by the feature extraction process. The data is then normalized using the following equation;
+We segmented data into 15ssecond segments (20 samples from each participant) followed by the feature extraction process. Then, we normalized each of the 133 features across the entire dataset using z-scaling:
 
 \begin{equation} \label{eq:normalized}
-   \mathbf{X}^{\prime} = \frac{\mathbf{X} - \mu}{\sigma}
+   \mathbf{X}^{\prime}_i = \frac{\mathbf{X}_i - \mu_i}{\sigma_i},
 \end{equation}
 
-We rank the importance of normalized features using t-test hence, a set of features with $p < .001$. Then, seven ranks are created as follow.
+where $\mu_i$ is the mean and $\sigma_i$ is the standard deviation of the data for the feature $i$.
 
-% \begin{left}
-%   \begin{tabular}{ lll }
-%   1.&$\text{Rank}_{\text{Baseline}}$  & listed with no reason. \\
-%   2.&$\text{Rank}_{\text{LR}}$        & listed according to the Logistic Regression Coefficient. \\
-%   3.&$\text{Rank}_{\text{LDA}}$       & listed according to the Linear Discriminant Analysis Coefficient. \\
-%   4.&$\text{Rank}_{\text{ADA}}$       & listed according to the feature importance score of AdaBoost. \\
-%   5.&$\text{Rank}_{\text{GB}}$        & listed according to the feature importance score Gradient Boosting. \\
-%   6.&$\text{Rank}_{\text{RF}}$        & listed according to the feature importance score Random Forest. \\
-%   7.&$\text{Rank}_{\text{Ensemble}}$  & listed according to the ranking information of the previous five ranks. \\
-%   \end{tabular}
-% \end{left}
+Next, we eliminated features unlikely to be useful for classification by compare the means of each features over each class separately using t-test for the null hypothesis of equal means. From the original 133 features, we found that 25 of t-test gave $p < .001$, so we used these 25 features for further consideration.
 
+We ranked the 25 features with the following 7 methods:
+
+% We rank the importance of normalized features using t-test hence, a set of features with $p < .001$. Then, seven ranks are created as follow.
 
 \begin{enumerate}
-    \item $\text{Rank}_{\text{Baseline}}$: listed with no reason.
-    \item $\text{Rank}_{\text{LR}}$: listed according to the Logistic Regression Coefficient.
-    \item $\text{Rank}_{\text{LDA}}$: listed according to the Linear Discriminant Analysis Coefficient.
-    \item $\text{Rank}_{\text{ADA}}$: listed according to the feature importance score of AdaBoost.
-    \item $\text{Rank}_{\text{GB}}$: listed according to the feature importance score of Gradient Boosting.
-    \item $\text{Rank}_{\text{RF}}$: listed according to the feature importance score of Random Forest.
-    \item $\text{Rank}_{\text{Ensemble}}$: listed according to the ranking score based on the previous five ranks. The score is calculated using Equation~\ref{eq:rank_score}
+    \item $\text{Rank}_{\text{Baseline}}$: <Will investigate t-value>.
+    \item $\text{Rank}_{\text{LR}}$: ranked according to the logistic regression coefficient.
+    \item $\text{Rank}_{\text{LDA}}$: ranked according to the linear discriminant analysis coefficient.
+    \item $\text{Rank}_{\text{AB}}$: ranked according to the feature importance score of AdaBoost.
+    \item $\text{Rank}_{\text{GB}}$: ranked according to the feature importance score of gradient boosting.
+    \item $\text{Rank}_{\text{RF}}$: ranked according to the feature importance score of random forest.
+    \item $\text{Rank}_{\text{Ensemble}}$: ranked according to a score based on the previous five rankings. The score for feature $i$ is
 \end{enumerate}
 
 \begin{equation} \label{eq:rank_score}
-   \text{score}(x) = \sum_{M=m} \text{Rank}_{m}.\text{index}(x)
+   \text{score}_i = \sum_{m\in M} \text{Rank}_{m}[i],
 \end{equation}
 
-where $M$ is $\{\text{LR}, \text{LDA}, \text{ADA}, \text{GB}, \text{RF} \}$ and $x$ is the interested feature. The $\text{Rank}_{\text{Ensemble}}$ is sorted in an ascending order, Thus, feature with the lowest score is the most important one.
+where $M = \{\text{LR}, \text{LDA}, \text{AB}, \text{GB}, \text{RF} \}$ and $i$ is the index of the feature of interest. $\text{Rank}_{\text{Ensemble}}$ is obtained by sorting the scores in ascending order. Thus, the feature with the lowest score is the most important one.
 
 \subsection{Classification}\label{subsec4}
-We extract the band power features from EEG signals and fed these to the classifiers. For classification, we have used two classifiers, Support Vector Machine \cite{Alshargie-2018, Subhani-2017} and Logistic Regression \cite{Saeed2020}, which have been demonstrated in previous studies to be the most efficient classifier \cite{Alshargie-2018, Kotsiantis2007, Saeed2020}.
+We utilize two classifiers commonly used in previous studies \cite{Alshargie-2018, Subhani-2017, Saeed2020, Kotsiantis2007}: logistic regression (LR) and support vector machine (SVM).
+
+% We extract the band power features from EEG signals and fed these to the classifiers. For classification, we have used two classifiers, Support Vector Machine \cite{Alshargie-2018, Subhani-2017} and Logistic Regression \cite{Saeed2020}, which have been demonstrated in previous studies to be the most efficient classifier \cite{Alshargie-2018, Kotsiantis2007, Saeed2020}.
+
+\subsubsection{Logistic Regression (LR)}
+In its simplest form, logistic regression is a generalized linear model for the Bernoulli (binary class) distribution that employs a logistic sigmoid in a linear combination of the features to represent a binary dependent variable i.e., $ \text{p} ( \text{y} \vert \text{x} ) $.
+
+\subsubsection{Support Vector Machine (SVM)}
+
+A support vector machine performs linear binary maximum margin classification in a feature space. SVMs have been shown to be very effective in EEG-based stress categorization studies \cite{Alshargie-2018, Subhani-2017}. A linear SVM would give a similar result to LR, but with a nonlinear transformation into feature space, can give higher accuracy.
+
 
 \subsection{Performance Metrics}\label{subsec5}
-
-% From the two feature sets ($Feature_{t-test}$ and $Feature_{LR}$), Target set is obtained by following equation;
-
-% $$ Target := \{x \mid x \text{ is in }{rank}_{1}\text{ to }{rank}_{i} \}\text{ where } 1 \leq i \leq 15 $$
-
-% In total of 30 target set.
-
-% T-SNE is used for visualizing the similarity of each target set along with the classification result (accuracy and cross validation score ) from both SVM and LR.
 
 A 10-CV score is used to measure the classification performance. t-SNE is used to visualize the similarity between samples. 
 
