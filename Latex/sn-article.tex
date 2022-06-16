@@ -116,16 +116,16 @@
 
 \maketitle
 \section{Introduction} \label{sec1}
-Stress is an unavoidable life phenomenon that can generate temporary discomfort as well as long-term consequences. Stress can have damaging effects on the mental health of individuals and can be categorized into acute (short-term) and chronic (long-term) occurrence \cite{Khosrowabadi-2011}. Acute stress is usually not a health risk, but the persistence of stress for a longer duration becomes chronic \cite{Khosrowabadi-2011}, which can lead to a state of depression, anxiety, and other possibly life-threatening issues. Chronic stress affects the human body at different levels ranging from skin conditions, eating habits, and inadequate sleeping to decision-making \cite{Thoits2010, Garg2001, Adam2007} and can be a better predictor of depressive symptoms as compared to acute stress \cite{McGonagle1990}. Early detection of chronic stress can therefore reduce the risk of physical and mental illness if the stress is identified and the individual undertakes appropriate stress relief therapies. 
+Stress is an unavoidable life phenomenon that can generate temporary discomfort as well as long-term consequences. Stress can have damaging effects on the mental health of individuals and can be categorized into acute (short-term) and chronic (long-term) occurrences \cite{Khosrowabadi-2011}. Acute stress is usually not a health risk, but the persistence of stress for a longer duration becomes chronic \cite{Khosrowabadi-2011}, which can lead to a state of depression, anxiety, and other possibly life-threatening issues. Chronic stress affects the human body at different levels ranging from skin conditions, eating habits, and inadequate sleeping to decision-making \cite{Thoits2010, Garg2001, Adam2007} and can be a better predictor of depressive symptoms as compared to acute stress \cite{McGonagle1990}. Early detection of chronic stress can therefore reduce the risk of physical and mental illness if the stress is identified and the individual undertakes appropriate stress relief therapies. 
 
-Several studies have developed techniques to assess chronic stress using subjective psychological self-report questionnaires such as the Perceived Stress Scale (PSS) \cite{Cohen-1983}. This approach is practical for capturing signs of stress over a long period, but the result could be biased, since participants must reconstruct their feelings in the past, and they may hide their real feelings due to personal circumstances. Some research has found that PSS assessments of chronic stress are not perfect but are generally valid \cite{Saeed2020}. As a result, the PSS alone in special cases may not bring genuine stress to light in self reports. Recently, objective physiological assessments based on bio-markers such as electroencephalography (EEG) signals have emerged as alternative means to detect mental states including acute stress \cite{Awang2011, Hu2015}. However, the relationship between chronic stress and EEG signals has not been widely investigated. We would like to predict chronic stress, but here we take the successful less ambitious objective of using EEG to separate less and more stressed individuals according to PSS. Based on the provocative results, we could then develop a clinical test with appropriate thresholds for chronic level stress. TODO: Admit in the conclusion that more work is needed to make this clinical.
+Several studies have developed techniques to assess chronic stress using subjective psychological self-report questionnaires such as the Perceived Stress Scale (PSS) \cite{Cohen-1983}. This approach is practical for capturing signs of stress over a long period, but the result could be biased, since participants must reconstruct their feelings from the past, and they may hide their real feelings due to personal circumstances. Some research has found that PSS assessments of chronic stress are generally valid but not perfect \cite{Saeed2020} so, the PSS alone may not always bring genuine stress to light in self reports. Recently, objective physiological assessments based on bio-markers such as electroencephalography (EEG) signals have emerged as alternative means to detect mental states including acute stress \cite{Awang2011, Hu2015}. However, the relationship between chronic stress and EEG signals has not been widely investigated. Although we would ultimately like to predict chronic stress, here we take the somewhat successful less ambitious objective of using EEG to separate less and more stressed individuals according to PSS. Given provocative results, we could then develop a clinical test with appropriate thresholds for chronic level stress. TODO: Admit in the conclusion that more work is needed to make this clinical.
 
-The aim of this study is to identify which EEG features are important contributors to accuracy of predictive classification for chronic stress. We performed a study with a total of 55 participants, each of whose rest-state EEG measurements were recorded for ten minutes with eyes closed. The label for each participant (more stressed or less stressed) was calculated from the statistics of their PSS score. An initial 133 features including five EEG frequency bands (delta, theta, alpha, beta, gamma), two custom bands ($\text{slow}$, $\text{beta}_{\text{low}}$), and one engineered band ($\text{gamma}_{\text{relative}}$) from 16 electrodes, as well as five lateral asymmetries of alpha and beta bands were extracted from the recorded EEG signals. We selected the 25 most important features using t-tests. We then ranked the initial 25 features with six methods. The first five rankings were based on five classifiers' feature importance scores. The five classifiers were Logistic Regression (LR), Linear Discriminant Analysis (LDA), AdaBoost (AB), Gradient Boosting (GB), and Random Forest (RF). The sixth ranking was created by combining the first five rankings using a voting scheme. Finally, the rankings were verified using 10-fold cross validation (10-CV), and t-Distributed Stochastic Neighbor Embedding (t-SNE) was used to visualize the similarity of the Stress and Non-Stress groups given a set of features.
+The aim of this study is to identify which EEG features are important contributors to the accuracy of predictive classification for high PSS scores. We performed a study with a total of 55 participants, each of whose rest-state EEG measurements were recorded for ten minutes with eyes closed. The target label for each participant (more stressed or less stressed) was calculated from the statistics of their actual PSS score. An initial 133 features including five EEG frequency bands (delta, theta, alpha, beta, gamma), two custom bands ($\text{slow}$, $\text{beta}_{\text{low}}$), and one engineered band ($\text{gamma}_{\text{relative}}$) from 16 electrodes, as well as five lateral asymmetries for alpha and beta bands, were extracted from the recorded EEG signals. We selected the 25 most important features using simple per-feature t-tests. We then ranked the importance of these initial 25 features with six methods. The first five rankings were based on five classifiers' feature importance scores. The five classifiers were Logistic Regression (LR), Linear Discriminant Analysis (LDA), AdaBoost (AB), Gradient Boosting (GB), and Random Forest (RF). The sixth ranking was created by combining the first five rankings using a voting scheme. Finally, the rankings obtained without train-test splits were verified using 10-fold cross validation (10-CV), and t-Distributed Stochastic Neighbor Embedding (t-SNE) was used to visualize the withing-class and between-class similarity of the selected feature vectors for the more stressed and less stressed groups given the selected set of features.
 
 % (4) What we achieve
 
 \begin{figure}[h!]
-    \caption{10-CVs score of SVM and LR classifier when using different feature important rankings and different numbers of features. Line plots show 10-CV trends as functions of the number of features. Bar plots show 10-CV scores at the best number of features, 6 for the SVM and 9 for LR.}
+    \caption{10-CV scores for SVM and LR classifiers using different feature important rankings and different numbers of features. Line plots show 10-CV trends as a function of the number of features. Bar plots show 10-CV scores at the overall best number of features, 6 for the SVM and 9 for LR.}
     \label{fig:cv_svm-lr}
     
     \centering
@@ -157,10 +157,10 @@ The aim of this study is to identify which EEG features are important contributo
     \end{subfigure}
 \end{figure}
 
-We found that a final SVM with the Radial Basis Function (RBF) kernel achieves a 0.9 10-CV score when using the top six features from $\text{Rank}_{\text{LR}}$ and $\text{Rank}_{\text{Ensemble}}$, as shown in Figure~\ref{fig:cv_svm}. The top eight features in $\text{Rank}_{\text{Ensemble}}$ are $\text{beta}_{f}$, $\text{F3}_{\text{delta}}$, $\text{F4}_{\text{delta}}$, $\text{F3}_{\text{beta}}$, $\text{P4}_{\text{delta}}$, $\text{F3}_{\text{gamma}}$, $\text{P4}_{\text{theta}}$, and $\text{C3}_{\text{theta}}$. In addition, t-SNE seems to suggest that the top six $\text{Rank}_{\text{Ensemble}}$ features a better represent chronic stress than a baseline ranking obtained from the earlier t-test, as shown in Figure~\ref{fig:t-SNE_baseline-ensemble}.
+We found that a final SVM with the Radial Basis Function (RBF) kernel achieves a 0.9 10-CV score when using the top six features from $\text{Rank}_{\text{LR}}$ and $\text{Rank}_{\text{Ensemble}}$, as shown in Figure~\ref{fig:cv_svm}. The top eight features in $\text{Rank}_{\text{Ensemble}}$ are $\text{beta}_{f}$, $\text{F3}_{\text{delta}}$, $\text{F4}_{\text{delta}}$, $\text{F3}_{\text{beta}}$, $\text{P4}_{\text{delta}}$, $\text{F3}_{\text{gamma}}$, $\text{P4}_{\text{theta}}$, and $\text{C3}_{\text{theta}}$. In addition, t-SNE seems to suggest that the top six $\text{Rank}_{\text{Ensemble}}$ features better reflect the stress grouping than a baseline ranking obtained from the earlier simple individual t-tests, as shown in Figure~\ref{fig:t-SNE_baseline-ensemble}.
 
 \begin{figure}[h!]
-    \caption{2D embeddings by t-SNE of top six features according to $\text{Rank}_{\text{Baseline}}$ and $\text{Rank}_{\text{Ensemble}}$. Green and red samples indicate Non-stress and Stress groups, respectively, and point shape indicates correct(`.') or incorrect(`x') classification results with a RBF-SVM. The $\text{Rank}_{\text{Ensemble}}$ features clearly admit a better separated representation}
+    \caption{2D embeddings by t-SNE of the top six features selected by $\text{Rank}_{\text{Baseline}}$ and $\text{Rank}_{\text{Ensemble}}$. Green and red samples indicate less stressed and more stressed groups, respectively, and point shape indicates correct(`.') or incorrect(`x') classification results with a RBF-SVM. The $\text{Rank}_{\text{Ensemble}}$ features clearly admit a better separated representation than the $\text{Rank}_{\text{Baseline}}$ features.}
     \label{fig:t-SNE_baseline-ensemble}
     
     \centering
@@ -180,17 +180,14 @@ We found that a final SVM with the Radial Basis Function (RBF) kernel achieves a
 
 % (5) Significant and contribution
 
-This paper implements and assesses several empirical methods for feature selection that combine t-test result with feature importance scores based on five different classifiers. Our result confirms that with appropriate feature selection, EEG data for stressed and non-stressed individuals are sufficient distinct for classifying chronic stress, and the top eight features agree with the previous work finding that the delta and beta frequency bands are the most important frequencies for this task.
-
-CONTINUE HERE
+This paper implements and assesses several empirical methods for feature selection that combine a t-test initial selection with feature importance scores based on five different classifiers. Our results confirm that with appropriate feature selection, EEG signals acquired from more stressed and less stressed individuals are sufficiently distinctive to classify them according to stress level, and our top eight features agree with conclusion of previous work finding that the delta and beta frequency bands are the most important frequencies for this task.
 
 \section{Related work} \label{sec2}
-Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), which is composed of the antagonistic regulation of the sympathetic (SNS) as well as the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have become an alternative technique to analyze mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency band\cite{Kulkarni2020}, where each of the frequency bands can be utilized to differentiate between different brain states \cite{Alshargie-2018}. A change of power in $\beta$ band is associated with alertness, whereas $\theta$ band occurred throughout the sleep state, and $\alpha$ band rose with relaxation \cite{Wang2014}. Recently, some studies used EEG signals conducted with various signals processing and machine learning methods to detect stress.
+Stress is known to cause aberrant reactions in the autonomic nervous system (ANS), including the antagonistic regulation of the sympathetic (SNS) and the parasympathetic (PNS) nervous system \cite{Cohen2000, Hughes2000}. These two systems are associated with stress and relaxation responses, respectively. Changes in the ANS can be detected by EEG signals \cite{Seo2010}. In recent years, EEG signals have emerged as a valid modalist for the analysis of mental states including stress \cite{Awang2011, Hu2015}. EEG signals can be decomposed into frequency bands \cite{Kulkarni2020}, each of which is useful for analysis of different brain states \cite{Alshargie-2018}. A change of power in beta band is associated with alertness, whereas theta band activity occurs throughout the sleep state, and alpha band activity rises with relaxation \cite{Wang2014}. Recent studies have analyzed EEG signals with various signal processing and machine learning methods to detect stress.
 
-Several studies have demonstrated the relationship between stress and EEG signals and show that EEG can be used as an input variable in both short-term and long-term stress analysis. In EEG, the $\alpha$ band is commonly used in stress assessment because it is increasing during the relaxation situation. On the other hand, it is decreasing during stress condition \cite{Alshargie-2016}. In contrast, $\alpha$ is not the only band that can indicate mental stress. The $\beta$ band has been found as a sign of mental stress due to an increase of power in $\beta$ band associated with an increase in alertness when performing cognitive tasks. The relationship between stress and $\beta$ band at the anterior temporal lobe has demonstrated when stress-inducing pictures were shown \cite{Seo2010, Awang2011, Hamid2010}. Meanwhile, theta band was used to assess stress during mental arithmetic tasks \cite{Grtner2015}. Moreover, the relative gamma band has been proposed as a biomarker for the identification of stress \cite{Arsalan2019}.
+Several studies have demonstrated a relationship between stress and EEG signals, and they show that EEG can be used as an input variable for prediction of both short-term and long-term stress. In EEG research, the alpha band is the most commonly used in stress assessment, because it is characterized by increasing activity during relaxation, and decreasing activity during stress \cite{Alshargie-2016}. However, alpha is not the only band that can indicate mental stress. The beta band has also been found to convey signs of mental stress; an increase of power in the beta band is associated with increased alertness when performing cognitive tasks. A relationship between stress and beta band activity at the anterior temporal lobe has been demonstrated when stress-inducing pictures are shown \cite{Seo2010, Awang2011, Hamid2010}. Meanwhile, theta band activity has been used to assess stress during mental arithmetic tasks \cite{Grtner2015}. Moreover, gamma band activity related to slow bands has also been proposed as a biomarker for the identification of stress \cite{Arsalan2019}.
 
-Previous studies have demonstrated the feasibility of using EEG for chronic stress assessment. Chronic stress is measured without involving stress-induced tasks. Since chronic stress is a greater indicator of depressive symptoms than acute stress \cite{McGonagle1990} as well as the potential of EEG to be employed as a stress indicator in everyday life \cite{Saeed2020}. Thus, we propose the use of EEG signals to identify chronic stress without inducing stress.
-
+Previous studies have demonstrated the feasibility of using EEG for chronic stress assessment. Chronic stress, unlike acute stress, can be measured without stress-inducing tasks. Since chronic stress is a more related to depressive symptoms than acute stress \cite{McGonagle1990}, and since EEG may be useful as a stress indicator in everyday life \cite{Saeed2020}, we propose the use of EEG signals to identify chronic stress without inducing stress experimentally.
 
 \section{Methodology}\label{sec3}
 
@@ -198,11 +195,9 @@ Previous studies have demonstrated the feasibility of using EEG for chronic stre
 A total of 55 healthy participants (30 male, 25 female) with ages ranging from 21 to 45 years $(\text{Mean} = 26, SD = 4.84)$ participated in the study. The participants were informed to avoid food and drink with caffeine as well as conditioners, hair creams, sprays, or styling gels on the day of the experiment. Prior to the experiment, all participants gave consent in writing before completing the questionnaire and having their EEG recorded.
 
 \subsection{Data Acquisition}\label{subsec2}
+The EEG acquisition phase of the experiment was conducted in a room with a controlled environment. An EEG electrode cap kit was used to record EEG signals of the participants at 125 Hz at 16 active points, namely $\text{FP1}$, $\text{FP2}$, $\text{F3}$, $\text{F4}$, $\text{F7}$, $\text{F8}$, $\text{C3}$, $\text{C4}$, $\text{T3}$, $\text{T4}$, $\text{T5}$, $\text{T6}$, $\text{P3}$, $\text{P4}$, $\text{O1}$, and $\text{O2}$, with two reference electrodes according to the electrode locations of the international 10 - 20 system for EEG (Figure~\ref{fig:activeelectrode}). The experimental procedure is shown in Figure~\ref{fig:procedure}. All participants were initially instructed regarding the experimental procedure, signed the consent form, then took the PSS questionnaire. Each participant was placed comfortably in a chair and asked to close their eyes for 10 minutes while keeping their head motionless to eliminate movement artifacts. The closed-eyes condition was utilized to simplify data processing (obviating the need to remove blink artifact). This design is consistently with previous research that has found that chronic stress can be predicted from EEG without stress induction \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
 
-The EEG acquisition phase of the experiment was conducted in a room with a controlled environment. An EEG Electrode Cap Kit was used to record EEG signals of the participants at 16 active electrodes, namely $\text{FP1}$, $\text{FP2}$, $\text{F3}$, $\text{F4}$, $\text{F7}$, $\text{F8}$, $\text{C3}$, $\text{C4}$, $\text{T3}$, $\text{T4}$, $\text{T5}$, $\text{T6}$, $\text{P3}$, $\text{P4}$, $\text{O1}$, and $\text{O2}$, with two reference electrodes according to the electrode locations of International 10 - 20 system for EEG (Figure~\ref{fig:activeelectrode}) with a sampling rate of 125 Hz. The experimental procedure is shown in Figure~\ref{fig:procedure}. All participants were initially instructed regarding the experimental procedure, signed consent form, then took the PSS questionnaire. Each participant was placed comfortably in a chair and asked to close their eyes for 10 minutes while keeping their head motionless to eliminate movement artifacts. The closed-eyes condition was utilized to simplify data processing. Previous research has found that chronic stress can be classified without stress induction \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
-% The closed-eyes condition was utilized because the particular stimuli can affect the physical, emotional, cognitive, or behavior of an individual. Thus, the eyes closed condition is a better choice without involving stress induction for chronic stress classification. \cite{Khosrowabadi-2011, Peng-2012, Saeed2020}.
-
-In this study, the PSS-10 questionnaire was used to assessing participants' stress levels and classify them. The questionnaire has 10 questions, each of which asks about the frequency of stress in the last month. Each question is answered on a scale of 0, which indicates that the incident never happened, to 4, which indicates that it occurs frequently. All participants were categorized into three groups based on their PSS scores, as either stressed, non-stressed, or neutral. PSS thresholds were chosen as
+In the study, the PSS-10 questionnaire was used to assess and classify participants' stress levels. The questionnaire has 10 questions, each of which asks about the frequency of stress the subject has experienced in the last month. Each question is answered on a scale of 0 (the incident never happened), to 4 (it occurs frequently). The group of participants was partitioned into three groups based on their PSS scores, as either stressed, non-stressed, or neutral [TODO]. PSS thresholds were chosen as
 
 \begin{equation} \label{eq:1}
    T_{u} =\mu + \frac{\sigma}{2}
@@ -212,7 +207,7 @@ In this study, the PSS-10 questionnaire was used to assessing participants' stre
    T_{l} =\mu - \frac{\sigma}{2},
 \end{equation}
 
-where $\mu$ is the mean of PSS scores and $\sigma$ is the standard deviation of the PSS scores overs all 55 participants, $T_{u}$ is an upper threshold and $T_{l}$ is a lower threshold. Any participants with PSS score lower than $T_{l}$ are classified as non-stressed, and those with PSS scores higher than $T_{u}$ are classified as stressed. Others are classified as neutral.
+where $\mu$ is the mean and $\sigma$ is the standard deviation of the full group's PSS scores over all 55 participants, $T_{u}$ is the upper threshold, and $T_{l}$ is the lower threshold. Any participants with PSS score lower than $T_{l}$ were labeled as non-stressed, and those with PSS scores higher than $T_{u}$ were labeled as stressed. Participants in the intermediary range were labeled as neutral and not used in the feature selection or classification experiment.
 
 \begin{figure}[h!]
   \centering
@@ -221,25 +216,16 @@ where $\mu$ is the mean of PSS scores and $\sigma$ is the standard deviation of 
   \label{fig:procedure}
 \end{figure}
 
-% \begin{figure}[htpb]
-%     \centering
-%     \includegraphics[width=\textwidth,height=6cm,keepaspectratio=true]{AFM_Wikipedia}
-%     \caption{
-%         Sketch of the functionality principle of an AFM, from \cite{WikipediaEN:AFM}. The laser beam hits the cantilever. As the cantilever is bended because of the interaction forces of the tip with the sample the reflection angle changes. This change is recognized by the photo diode and translated into a picture by the detector.
-%     }
-%     \label{fig:basics AFM sketch}
-% \end{figure}
-
 \begin{figure}[h!]
  \centering
-  \caption{The electrode locations of International 10-20 system for EEG recording from \cite{wiki:10-20}}
+  \caption{Electrode locations of International 10-20 system for EEG recording \cite{wiki:10-20}.}
   \includegraphics[width=0.5\textwidth]{Electrodeplacement.png}
   \label{fig:activeelectrode}
 \end{figure}
 
 \subsection{Feature Extraction}\label{method:featureExtraction}
 
-The first five minutes of the rest-state EEG signals were segmented into 20 smaller records (15 seconds each). For each record, the five EEG frequency bands were obtained using the \texttt{psd\_welch} function from in the \texttt{mne} library. The function calculates power spectral density (PSD) of multiple smaller windows and average them to get a smoother result. The frequency bands, namely, $\delta$ (1-3 Hz), $\theta$ (4-7 Hz), $\alpha$ (8-12 Hz), $\beta$ (13-30 Hz), $\gamma$ (25-43 Hz), slow (4-13 Hz), and $\beta_{\text{low}}$ (13-17 Hz) were computed from each electrode. We did not perform any other preprocessing. The ratio of gamma to slow bands was used to calculate a $\gamma_{\text{relative}}$. Moreover, there were five Alpha and Beta asymmetries determined. The following formulae were used to compute the alpha asymmetries:
+The first five minutes of the participants' rest-state EEG signals were segmented into 20 smaller records (15 seconds each). For each record, the five EEG frequency bands were obtained using the \texttt{psd\_welch} function from in the \texttt{mne} library. The function calculates power spectral density (PSD) of multiple smaller windows and average them to get a smoother result. The frequency bands, namely, delta (1-3 Hz), theta (4-7 Hz), alpha (8-12 Hz), beta (13-30 Hz), gamma (25-43 Hz), slow (4-13 Hz), and $\text{beta}_{\text{low}}$ (13-17 Hz) were computed from each electrode. We did not perform any other preprocessing. The ratio of gamma to slow bands was used to calculate the $\text{gamma}_{\text{relative}}$ feature. Moreover, there were five alpha and beta asymmetries. The following formulae were used to compute the alpha asymmetries:
 
 \begin{equation} \label{eq:3}
    \alpha_{f} =\frac{ \text{F4}_{\alpha} - \text{F3}_{\alpha} }{ \text{F4}_{\alpha} + \text{F3}_{\alpha} }
@@ -253,7 +239,7 @@ The first five minutes of the rest-state EEG signals were segmented into 20 smal
    \alpha_{a} ={\alpha_{f}+\alpha_{t}}
 \end{equation}
 
-$\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicate frontal, temporal, and $\alpha$ asymmetries, respectively, and $\text{channel}_\alpha$ denotes the PSD of $\alpha$ at each electrode. $\beta$ asymmetry was computed over the frontal and temporal region using the same procedure:
+$\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicate frontal, temporal, and alpha asymmetries, respectively, and $\text{channel}_\alpha$ denotes the PSD of alpha at each electrode. The beta asymmetry was computed over the frontal and temporal region using the same procedure:
 
 \begin{equation} \label{eq:6}
     \beta_{f} =\frac{ \text{F4}_{\beta} - \text{F3}_{\beta} }{ \text{F4}_{\beta} + \text{F3}_{\beta} }
@@ -263,32 +249,32 @@ $\alpha_{f}$, $\alpha_{t}$ and $\alpha_{a}$ indicate frontal, temporal, and $\al
     \beta_{t} =\frac{ \text{T4}_{\beta} - \text{T3}_{\beta} }{ \text{T4}_{\beta} + \text{T3}_{\beta} }
 \end{equation}
 
-$\beta_{f}$ and $\beta_{t}$ indicate frontal and temporal asymmetries of the $\beta$ band, and $\text{channel}_\beta$ denotes the PSD of $\beta$ at each electrode.
+$\beta_{f}$ and $\beta_{t}$ indicate frontal and temporal asymmetries of the beta band, and $\text{channel}_\beta$ denotes the PSD of beta at each electrode.
 
-In total, the number of extracted features is $(16 \times 8) + 5 = 133$.
+In total, we extracted $(16 \times 8) + 5 = 133$ features.
 
 \subsection{Feature Selection}\label{sec:feature_selection}
-We segmented data into 15ssecond segments (20 samples from each participant) followed by the feature extraction process. Then, we normalized each of the 133 features across the entire dataset using z-scaling:
+% We segmented data into 15ssecond segments (20 samples from each participant) followed by the feature extraction process. 
+
+We normalized each of the 133 features across the entire dataset using z-scaling:
 
 \begin{equation} \label{eq:normalized}
    \mathbf{X}^{\prime}_i = \frac{\mathbf{X}_i - \mu_i}{\sigma_i},
 \end{equation}
 
-where $\mu_i$ is the mean and $\sigma_i$ is the standard deviation of the data for the feature $i$.
+where $\mu_i$ is the mean and $\sigma_i$ is the standard deviation of the data for feature $i$ over all samples across the entire dataset.
 
-Next, we eliminated features unlikely to be useful for classification by compare the means of each features over each class separately using t-test for the null hypothesis of equal means. From the original 133 features, we found that 25 of t-test gave $p < .001$, so we used these 25 features for further consideration.
+Next, we eliminated features unlikely to be useful for classification by comparing the conditional means of each feature over each class (more stressed and less stressed) separately using t-tests for the null hypothesis of equal means. From the original 133 features, we found that 25 of t-tests gave $p < .001$, so we retained these 25 features for further consideration.
 
-We ranked the 25 features with the following 7 methods:
-
-% We rank the importance of normalized features using t-test hence, a set of features with $p < .001$. Then, seven ranks are created as follow.
+We then ranked the 25 features using seven methods:
 
 \begin{enumerate}
     \item $\text{Rank}_{\text{Baseline}}$: <Will investigate t-value>.
-    \item $\text{Rank}_{\text{LR}}$: ranked according to the logistic regression coefficient.
-    \item $\text{Rank}_{\text{LDA}}$: ranked according to the linear discriminant analysis coefficient.
-    \item $\text{Rank}_{\text{AB}}$: ranked according to the feature importance score of AdaBoost.
-    \item $\text{Rank}_{\text{GB}}$: ranked according to the feature importance score of gradient boosting.
-    \item $\text{Rank}_{\text{RF}}$: ranked according to the feature importance score of random forest.
+    \item $\text{Rank}_{\text{LR}}$: ranked according to the absolute value of the logistic regression coefficient assigned to the feature.
+    \item $\text{Rank}_{\text{LDA}}$: ranked according to the absolute value of the linear discriminant analysis coefficient assigned to the feature.
+    \item $\text{Rank}_{\text{AB}}$: ranked according to the feature importance score given by AdaBoost. The importance score is the sum of the weight of each weak classifier utilizing the feature in question. [TODO: Recheck]
+    \item $\text{Rank}_{\text{GB}}$: ranked according to the feature importance score given by gradient boosting. The importance score is the sum of the weight of each weak classifier utilizing the feature in question. [TODO: Recheck]
+    \item $\text{Rank}_{\text{RF}}$: ranked according to the feature importance score given by random forest. The importance score is the sum of the weight of each weak classifier utilizing the feature in question. [TODO: Recheck]
     \item $\text{Rank}_{\text{Ensemble}}$: ranked according to a score based on the previous five rankings. The score for feature $i$ is
 \end{enumerate}
 
@@ -296,23 +282,20 @@ We ranked the 25 features with the following 7 methods:
    \text{score}_i = \sum_{m\in M} \text{Rank}_{m}[i],
 \end{equation}
 
-where $M = \{\text{LR}, \text{LDA}, \text{AB}, \text{GB}, \text{RF} \}$ and $i$ is the index of the feature of interest. $\text{Rank}_{\text{Ensemble}}$ is obtained by sorting the scores in ascending order. Thus, the feature with the lowest score is the most important one.
+where $M = \{\text{LR}, \text{LDA}, \text{AB}, \text{GB}, \text{RF} \}$, and $i$ is the index of the feature of interest. $\text{Rank}_{\text{Ensemble}}$ is obtained by sorting the scores in ascending order. Thus, the feature with the lowest score (summed rank) is the most important one.
 
 \subsection{Classification}\label{subsec4}
-We utilize two classifiers commonly used in previous studies \cite{Alshargie-2018, Subhani-2017, Saeed2020, Kotsiantis2007}: logistic regression (LR) and support vector machine (SVM).
-
-% We extract the band power features from EEG signals and fed these to the classifiers. For classification, we have used two classifiers, Support Vector Machine \cite{Alshargie-2018, Subhani-2017} and Logistic Regression \cite{Saeed2020}, which have been demonstrated in previous studies to be the most efficient classifier \cite{Alshargie-2018, Kotsiantis2007, Saeed2020}.
+We utilize two classifiers commonly used in previous studies \cite{Alshargie-2018, Subhani-2017, Saeed2020, Kotsiantis2007}: logistic regression (LR) and the support vector machine (SVM).
 
 \subsubsection{Logistic Regression (LR)}
 In its simplest form, logistic regression is a generalized linear model for the Bernoulli (binary class) distribution that employs a logistic sigmoid in a linear combination of the features to represent a binary dependent variable i.e., $ \text{p} ( \text{y} \vert \text{x} ) $.
 
 \subsubsection{Support Vector Machine (SVM)}
+A support vector machine performs linear binary maximum margin classification in a feature space. SVMs have been shown to be very effective in EEG-based stress categorization studies \cite{Alshargie-2018, Subhani-2017}. A linear SVM would give a similar result to LR, but with a nonlinear transformation into feature space, SVMs can give higher accuracy.
 
-A support vector machine performs linear binary maximum margin classification in a feature space. SVMs have been shown to be very effective in EEG-based stress categorization studies \cite{Alshargie-2018, Subhani-2017}. A linear SVM would give a similar result to LR, but with a nonlinear transformation into feature space, can give higher accuracy.
-
+[TODO: Add LDA, Ada, RF, Boost]
 
 \subsection{Performance Metrics}\label{subsec5}
-
 A 10-CV score is used to measure the classification performance. t-SNE is used to visualize the similarity between samples. 
 
 \section{Results}\label{sec4}
