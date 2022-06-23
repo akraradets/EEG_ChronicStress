@@ -137,3 +137,7 @@ dmypy.json
 2-ChronicStress/cache/*
 2-ChronicStress/export/*
 fmri
+
+3-DoubleCrossValidation/data/*
+3-DoubleCrossValidation/cache/*
+!.keep
