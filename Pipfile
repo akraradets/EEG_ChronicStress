@@ -7,12 +7,7 @@ name = "pypi"
 numpy = "*"
 pandas = "*"
 mne = "*"
-matplotlib = "*"
-tqdm = "*"
 sklearn = "*"
-ipywidgets = "*"
-nibabel = "*"
-shap = "*"
 
 [dev-packages]
 ipykernel = "*"
