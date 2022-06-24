@@ -138,6 +138,7 @@ dmypy.json
 2-ChronicStress/export/*
 fmri
 
-3-DoubleCrossValidation/data/*
+3-DoubleCrossValidation/data/EEG/*
 3-DoubleCrossValidation/cache/*
 !.keep
+3-DoubleCrossValidation/data/PSS.csv

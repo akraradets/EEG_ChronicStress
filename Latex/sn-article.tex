@@ -295,6 +295,8 @@ A support vector machine performs linear binary maximum margin classification in
 
 [TODO: Add LDA, Ada, RF, Boost]
 
+[Start from here]
+
 \subsection{Performance Metrics}\label{subsec5}
 A 10-CV score is used to measure the classification performance. t-SNE is used to visualize the similarity between samples. 
 
@@ -302,15 +304,15 @@ A 10-CV score is used to measure the classification performance. t-SNE is used t
 % The objective of this study was to understand the effectiveness of EEG in chronic stress assessment. The results of this study, which include group labelling, experimental results, feature selection, and classification were interpreted.
 
 \subsection{Groups Labeling} \label{subsec6}
-A total of 55 participants can be divided into 3 groups consisting of Stress, Non-Stress, and Neutral groups based on the PSS questionnaire score. From the Equation~\ref{eq:1} and Equation~\ref{eq:2}, we obtain the $\mu$, $\sigma$ = (20.75$\pm$6.13). The score lower than 17.68 is considered to be Non-Stress group, whereas the score higher than 23.81 is considered to be Stress group. The participants with a score in between the first standard deviation are considered to be in Neutral group and are discarded in the classification. As a result, the Stress group comprises 20 participants, while Non-Stress group comprises 16 participants. In total, the number of subjects in classification is $(20 + 16) = 36$ and $(36 \times 20) = 720$ samples after segmentation.
+The total number of 55 participants are divided into three groups: Stressed, Non-Stressed, and Neutral groups based on the PSS questionnaire score as describe in the section [TODO]. From the Equation~\ref{eq:1} and \ref{eq:2}, we obtained statistics $\mu$, $\sigma$ = (20.75$\pm$6.13). Participants scoring below 17.68 are considered Non-Stressed, whereas participants scoring higher than 23.81 are considered Stressed group. Participants scoring with 0.5 standard deviation [TODO] are considered to be in Neutral group and are discarded in the classification. As a result, the Stress group comprises 20 participants, while Non-Stress group comprises 16 participants. In total, the number of subjects in classification is $(20 + 16) = 36$ and $(36 \times 20) = 720$ samples after segmentation.
 
 \subsection{t-test result}
-The independent sample t-test with $p < .001$ was used to select feature in this study. For the t-test, the degree of freedom was 1 and the null hypothesis was tested for EEG feature of Stress and Non-Stress groups. The result using the p-values for different features are shown in Table~\ref{tab:featureselection1} and Table~\ref{tab:featureselection2}. 
+As described in the section [TODO], Independent sample two-tailed t-tests with $p < .001$ were used to select any feature set study. For the t-test, the degree of freedom was 1 and the null hypothesis was tested for EEG feature of Stress and Non-Stress groups. The result using the p-values for different features are shown in Table~\ref{tab:featureselection1} and Table~\ref{tab:featureselection2}. 
 
 % It is evident that at a confidence level of $< .001$, delta, theta, and alpha from frontal as well as alpha asymmetry are statistically significant feature in stressed and non-stressed groups. The rest of the feature, which are statistically significant are shown in the Table~\ref{tab:featureselection1} and Table~\ref{tab:featureselection2}.
 
 \begin{table}[h!]
-\caption{Results for the t-test on various frequency bands.}
+\caption{Results for t-tests on various frequency bands.}
 \scalebox{0.75}{
 \begin{tabular}{ccccccccc}
 \hline
@@ -347,13 +349,13 @@ O2                                   & \textbf{0.001}          & 0.384          
     \label{tab:featureselection2}
 \end{table}
 
-There are 25 features with $p < .001$ which are $\text{FP1}_{\delta}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{C3}_{\delta}$, $\text{P4}_{\delta}$, $\text{F3}_{\theta}$, $\text{C3}_{\theta}$, $\text{T4}_{\theta}$, $\text{P4}_{\theta}$, $\text{F3}_{\alpha}$, $\text{F4}_{\alpha}$, $\text{F7}_{\alpha}$, $\text{T6}_{\alpha}$, $\text{P4}_{\alpha}$, $\text{F3}_{\beta}$, $\text{F3}_{\gamma}$, $\text{T3}_{\gamma}$, $\text{F3}_\text{slow}$, $\text{F3}_{\text{Low}\beta}$, $\text{T4}_{\text{Low}\beta}$, $\text{C3}_{\text{RG}}$, $\alpha_{f}$, $\alpha_{t}$, $\alpha_{a}$,$\beta_{f}$. We use this as a list for $\text{Rank}_{\text{Baseline}}$.
+A total of 25 features had $p < .001$, namely $\text{FP1}_{\delta}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{C3}_{\delta}$, $\text{P4}_{\delta}$, $\text{F3}_{\theta}$, $\text{C3}_{\theta}$, $\text{T4}_{\theta}$, $\text{P4}_{\theta}$, $\text{F3}_{\alpha}$, $\text{F4}_{\alpha}$, $\text{F7}_{\alpha}$, $\text{T6}_{\alpha}$, $\text{P4}_{\alpha}$, $\text{F3}_{\beta}$, $\text{F3}_{\gamma}$, $\text{T3}_{\gamma}$, $\text{F3}_\text{slow}$, $\text{F3}_{\text{Low}\beta}$, $\text{T4}_{\text{Low}\beta}$, $\text{C3}_{\text{RG}}$, $\alpha_{f}$, $\alpha_{t}$, $\alpha_{a}$,$\beta_{f}$. We use this list as the baseline ranking ($\text{Rank}_{\text{Baseline}}$).
 
 \subsection{Ranking with coefficient and feature importance score}
 
-We rank the 25 features from the t-test result using coefficient/feature importance score of a classifier as mentioned in the Section~\ref{sec:feature_selection}. To verify any $\text{Rank}_{m}$ where $m \in \{\text{LR}, \text{LDA}, \text{ADA}, \text{GB}, \text{RF}\}$, we (1) iterate over the index of $\text{Rank}_{m}$; (2) select the features from the $\text{Rank}_{m}^{1}$ to $\text{Rank}_{m}^{i}$ where $i$ is the current iteration; (3) calculate the 10-CV score using rbf-SVM and LR; and (4) plot the t-SNE space to visualize the similarity of samples given the features from the iteration that SVM can achieve over $0.9$ 10-CV score.
+We next ranked the 25 features selected by the t-test result using feature importance scores for the classifiers mentioned in the Section~\ref{sec:feature_selection}. To verify any $\text{Rank}_{m}$ where $m \in \{\text{LR}, \text{LDA}, \text{ADA}, \text{GB}, \text{RF}\}$, we (1) iterate over the index from $\text{Rank}_{m}$; (2) select features from $\text{Rank}_{m}^{1}$ to $\text{Rank}_{m}^{i}$, where $i$ is the index of the current iteration; (3) calculate 10-CV scores for RBF-SVM and LR; and (4) plot the t-SNE space to visualize the similarity of sample embeddings given the features from the iteration in which the SVM achieves a $0.9$ 10-CV score.
 
-The 10-CV score threshold of 0.9 for SVM and 0.8 for LR is selected based on the 10-CV score of each model when training the model using 25 features. The SVM exceeds 0.9 10-CV score while LR can reach 0.85 at best. Table that reports every ranks and 10-CV score of all classifiers can be found in Appendix~\ref{apen:ranks}.
+The 10-CV score thresholds of 0.9 for the SVM models and 0.8 for the LR models were selected based on the 10-CV score of each model when trained using 25 features. In this preliminary experiment, the SVM exceeded 0.9 10-CV score, while LR could only reach 0.85 at best. Table [TODO] that reports every ranks and 10-CV score of all classifiers can be found in Appendix~\ref{apen:ranks}.
 
 
 % \subsubsection{Using Logistic Regression Coefficient to rank importantness}
@@ -361,15 +363,15 @@ The 10-CV score threshold of 0.9 for SVM and 0.8 for LR is selected based on the
 
 \subsubsection{Baseline}
 
-When using $\text{Rank}_{\text{Baseline}}$, rbf-SVM can achieve 0.9 10-CV score with top eight features including $\text{FP1}_{\delta}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{C3}_{\delta}$, $\text{P4}_{\delta}$, $\text{F3}_{\theta}$, $\text{C3}_{\theta}$, and $\text{T4}_{\theta}$ as shown in Table~\ref{tab:cv_baseline}. Using the same rank with LR, however, the model requires top 16 features in order to reach 0.8 10-CV score. 
+When using $\text{Rank}_{\text{Baseline}}$, the RBF-SVM could achieve a 0.9 10-CV score with the top eight features, $\text{FP1}_{\delta}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{C3}_{\delta}$, $\text{P4}_{\delta}$, $\text{F3}_{\theta}$, $\text{C3}_{\theta}$, and $\text{T4}_{\theta}$, as shown in Table~\ref{tab:cv_baseline}. Using the same rank with LR, however, the model required the top 16 features to reach a 0.8 10-CV score. 
 
 \begin{table}[h!]
 \centering
-\caption{The 10-CV score of each classifier when using $\text{Rank}_{\text{Baseline}}$ as a rank. The model is trained on a list of features from $\text{Rank}^1$ to $\text{Rank}^i$ where $i$ is the row number. }
+\caption{The 10-CV score of each classifier when using $\text{Rank}_{\text{Baseline}}$ as a rank. The model is trained on a list of features from $\text{Rank}^1$ to $\text{Rank}^i$. [TODO]}
 \label{tab:cv_baseline}
 \begin{tabular}{r|ccc}
 \hline
- No. & $\text{Rank}_{\text{Baseline}}$ &                      SVM &                       LR \\
+ $i$ & $\text{Rank}_{\text{Baseline}}$ &                      SVM &                       LR \\
 \hline
    1 &           $\text{FP1}_{\delta}$ &          0.621$\pm$0.046 &          0.578$\pm$0.054 \\
    2 &            $\text{F3}_{\delta}$ &          0.740$\pm$0.061 &          0.678$\pm$0.055 \\
@@ -409,9 +411,9 @@ When using $\text{Rank}_{\text{Baseline}}$, rbf-SVM can achieve 0.9 10-CV score 
   \label{fig:t-sne-bseline-8}
 \end{figure}
 
-\subsubsection{Logistic Regression Coefficient}
+\subsubsection{Logistic Regression Coefficient Ranking}
 
-Table~\ref{tab:cv_LR} shows the result using the ranked features of Logistic Regression Coefficient. With this rank, the SVM is able to achieve 0.9 10-CV score at top six features. The LR classifier also reach 0.8 10-CV score at top nine features, seven features less than the $\text{Rank}_{\text{Baseline}}$. The top six features of $\text{Rank}_{\text{LR}}$ are $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\beta_{f}$, $\text{C3}_{\text{RG}}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, and $\text{T4}_{\theta}$.
+Table~\ref{tab:cv_LR} shows the results we obtain using the ranking of features by the logistic regression coefficient. With this ranking, the SVM was able to achieve 0.9 10-CV score with only six features. The LR classifier also reached a 0.8 10-CV score using the top nine features, seven features fewer than with $\text{Rank}_{\text{Baseline}}$. The top six features according to $\text{Rank}_{\text{LR}}$ are $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\beta_{f}$, $\text{C3}_{\text{RG}}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, and $\text{T4}_{\theta}$.
 
 \begin{table}[h!]
 \centering
@@ -470,7 +472,7 @@ Table~\ref{tab:cv_LR} shows the result using the ranked features of Logistic Reg
 
 \subsubsection{Ensemble}
 
-The score for $\text{Rank}_{\text{Ensemble}}$ is calculated follow the Equation~\ref{eq:rank_score}. Table~\ref{tab:cv_ensemble} shows the calculated score and rank them accordingly. In this configuration, SVM, at top six features, achieves $0.899\pm0.040$ 10-CV score and, later, achieves over 0.9 10-CV score at iteration eight. The top eight features are $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$.
+Scores for the $\text{Rank}_{\text{Ensemble}}$ ranking were calculated following Equation~\ref{eq:rank_score}. Table~\ref{tab:cv_ensemble} shows the calculated scores and ranks them accordingly. In this configuration, the SVM with the top six features [TODO] achieves $0.899\pm0.040$ 10-CV score and, later, achieves over 0.9 10-CV score at iteration eight. The top eight features are $\beta_{f}$, $\text{F3}_{\delta}$, $\text{F4}_{\delta}$, $\text{F3}_{\beta}$, $\text{P4}_{\delta}$, $\text{F3}_{\gamma}$, $\text{P4}_{\theta}$, and $\text{C3}_{\theta}$.
 
 \begin{table}[h!]
 \centering
@@ -517,7 +519,7 @@ The score for $\text{Rank}_{\text{Ensemble}}$ is calculated follow the Equation~
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/t-sne-lr-6.png}
-        \caption{top six LR}
+        \caption{Top six features according to LR.}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}

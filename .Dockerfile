@@ -18,7 +18,4 @@ RUN apt install git -y
 # If you want to use `pip install`, just remove `pipenv` and continue with `pip install`
 RUN pip install pipenv
 
-# Latex
-RUN apt install -y dvipng texlive-latex-extra texlive-fonts-recommended cm-super
-
 CMD tail -f /dev/null
