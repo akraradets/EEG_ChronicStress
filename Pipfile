@@ -8,6 +8,7 @@ numpy = "*"
 pandas = "*"
 mne = "*"
 sklearn = "*"
+mne-features = "*"
 
 [dev-packages]
 ipykernel = "*"
