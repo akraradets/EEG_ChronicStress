@@ -98,10 +98,11 @@ class Dataset:
 
     def _convert_df_to_mne_raw(self, df:pd.DataFrame) -> mne.io.RawArray:
         # convert data to mne.Epochs
-        ch_names = list(df.columns[1:-1])
+        # ch_names = list(df.columns[1:-1])
+        ch_names = ['Fp1','Fp2','F3','F4','F7','F8','C3','C4','T3','T4','T5','T6','P3','P4','O1','O2']
         ch_types = ['eeg'] * len(ch_names)
         # https://mne.tools/stable/generated/mne.create_info.html
-        info = mne.create_info(ch_names=ch_names, ch_types=ch_types, sfreq=self.sampling_rate)
+        info = mne.create_info(ch_names=ch_names, ch_types=ch_types, sfreq=self.sampling_rate) # type: ignore
 
         df = df.T  #mne looks at the tranpose() format
         df[:-1] *= 1e-6  #convert from uVolts to Volts (mne assumes Volts data)
