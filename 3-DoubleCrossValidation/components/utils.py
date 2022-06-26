@@ -28,5 +28,6 @@ def clear_cache(path:str, filename:str=None): # type: ignore
         file_paths = [os.path.join(path, filename)]
     
     for file_path in file_paths:
-        logging.info(f"cache:{file_path} is remove.")
         os.remove(file_path)
+        logger = logging.getLogger('main-logger')
+        logger.info(f"cache:{file_path} is removed.")

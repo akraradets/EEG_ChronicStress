@@ -5,12 +5,14 @@ import pprint
 import os
 
 def preprocessing(data:np.ndarray, sampling_rate:int) -> np.ndarray:
+    logger = logging.getLogger('main')
     data = PSD(data=data, sampling_rate=sampling_rate)
     data = relative(data=data)
     data = asymetries(data=data)
     return data
 
 def PSD(data:np.ndarray,  sampling_rate:int) -> np.ndarray:
+    logger = logging.getLogger('main')
     # [alias_feature_function]__[optional_param]
     params = {
         'pow_freq_bands__log':True,
@@ -26,7 +28,7 @@ def PSD(data:np.ndarray,  sampling_rate:int) -> np.ndarray:
             'beta_low': [13,17]
         } 
     }
-    logging.info(f"""extractor_params={pprint.pformat(params, indent=2)}""")
+    logger.info(f"""extractor_params={pprint.pformat(params, indent=2)}""")
 
     fe = FeatureExtractor(sfreq=sampling_rate, selected_funcs=['pow_freq_bands'],params=params,n_jobs=os.cpu_count())
     data = fe.fit_transform(X=data)
@@ -35,6 +37,7 @@ def PSD(data:np.ndarray,  sampling_rate:int) -> np.ndarray:
     return data
 
 def relative(data:np.ndarray) -> np.ndarray:
+    logger = logging.getLogger('main')
     # Here the data shape changes to (n_sample, n_channels * 7)
     # In the code of mne_features, they use psd.ravel() which yield a flattern version of the array
     # the default method of this is ravel('C') -> https://numpy.org/doc/stable/reference/generated/numpy.ravel.html
@@ -56,6 +59,7 @@ def relative(data:np.ndarray) -> np.ndarray:
     return data
 
 def asymetries(data:np.ndarray) -> np.ndarray:
+    logger = logging.getLogger('main')
     F4_alpha = data[:, _get_index('F4','alpha')]
     F3_alpha = data[:, _get_index('F3','alpha')]
     T4_alpha = data[:, _get_index('T4','alpha')]
@@ -78,12 +82,13 @@ def asymetries(data:np.ndarray) -> np.ndarray:
     beta_t = np.expand_dims(beta_t, axis=1)
 
     # 25-06-2022 18:24:51|preprocessing.py:73|INFO|data.shape=(420, 128), alpha_f.shape=(420,), alpha_t.shape=(420,), alpha_a.shape=(420,), beta_f.shape=(420,), beta_t.shape=(420,)
-    logging.info(f"{data.shape=}, {alpha_f.shape=}, {alpha_t.shape=}, {alpha_a.shape=}, {beta_f.shape=}, {beta_t.shape=}")
+    logger.info(f"{data.shape=}, {alpha_f.shape=}, {alpha_t.shape=}, {alpha_a.shape=}, {beta_f.shape=}, {beta_t.shape=}")
     data = np.hstack([data, alpha_f, alpha_t, alpha_a, beta_f, beta_t])
     assert data.shape[1] == (16 * 8) + 5, f"The second dimension should be (16*8)+5=133. {data.shape=}"
     return data
 
 def _get_index(ch_name:str = None, band_name:str = None) -> int: # type : ignore
+    logger = logging.getLogger('main')
     ch_names = ['Fp1','Fp2','F3','F4','F7','F8','C3','C4','T3','T4','T5','T6','P3','P4','O1','O2']
     band_names = ['delta','theta','alpha','beta','gamma','slow','beta_low']
     assert ((ch_name == None) and (band_name == None)) == False, f"Both ch_name and band_name can not be None at the same time"

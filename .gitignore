@@ -139,6 +139,6 @@ dmypy.json
 fmri
 
 3-DoubleCrossValidation/data/*
-# 3-DoubleCrossValidation/data/PSS.csv
 cache/*
+cv_results/*
 !.keep
