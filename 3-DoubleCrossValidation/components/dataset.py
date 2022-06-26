@@ -1,12 +1,11 @@
 from __future__ import annotations
 import os
-from tracemalloc import start
 from typing import Tuple
 import pandas as pd
 import pickle
 import numpy as np
 import mne
-import sklearn
+import logging
 class Dataset:
     GROUP_NON_STRESSED = 0
     GROUP_NEUTRAL = 2
@@ -47,15 +46,15 @@ class Dataset:
             self.attrs.append(attr)
             self.scores.append(PSS.loc[index, 'PSS Score'])
 
-        print(f"Found: {len(self.files)} files")
+        logging.info(f"Found: {len(self.files)} files")
 
         #### Init Attribute ####
         self.data = []
         self.groups = self._calculate_group()
 
-        print(f"Non-stressed:{sum(self.groups == self.GROUP_NON_STRESSED)}")
-        print(f"Stressed:{sum(self.groups == self.GROUP_STRESSED)}")
-        print(f"Neutral:{sum(self.groups == self.GROUP_NEUTRAL)}")
+        logging.info(f"Non-stressed:{sum(self.groups == self.GROUP_NON_STRESSED)}")
+        logging.info(f"Stressed:{sum(self.groups == self.GROUP_STRESSED)}")
+        logging.info(f"Neutral:{sum(self.groups == self.GROUP_NEUTRAL)}")
 
     def set_sampling_rate(self, sampling_rate:int):
         self.sampling_rate = sampling_rate
@@ -71,8 +70,11 @@ class Dataset:
         stop_sample = stop_minute * self.sampling_rate * 60
         step_sample = segment_second * self.sampling_rate
 
-        assert (stop_sample - start_sample) % step_sample == 0, f"The number segment_second={segment_second} is not valid. Please select the number that can divide stop_minute - start_minute."
-        print(f"number of epochs = {(stop_sample - start_sample)/step_sample}")
+        assert (stop_sample - start_sample) % step_sample == 0,\
+            (f"The number segment_second={segment_second} is not valid. ",
+            "Please select the number that can divide stop_minute - start_minute.")
+
+        logging.info(f"number of epochs = {(stop_sample - start_sample)/step_sample}")
         self.start_sample = start_sample
         self.stop_sample = stop_sample
         self.step_sample = step_sample
@@ -81,13 +83,13 @@ class Dataset:
         # steps = np.expand_dims(steps, axis=1)
         # marker = np.concatenate( [steps, np.zeros( steps.shape ), np.ones( steps.shape ) ], axis=1  ).astype(np.int64)
         # self.marker = marker
-        # print(f"marker.shape={self.marker.shape}")
+        # logging.info(f"marker.shape={self.marker.shape}")
 
     def _calculate_group(self) -> np.ndarray:
         N = len(self.scores)
         mu = sum(self.scores)/N
         std = (sum((np.array(self.scores) - mu)**2)/N)**0.5 # type: ignore
-        print(f"Mean:{mu}, Std:{std}")
+        logging.info(f"Mean:{mu},Std:{std}")
         Tu = mu + (std/2)
         Tl = mu - (std/2)
 
@@ -197,6 +199,11 @@ class Dataset_Builder:
         return self.dataset
 
 if __name__ == "__main__":
+    logging.basicConfig(filename="debug.log",
+                    format='%(asctime)s|%(levelname)s|%(message)s', 
+                    datefmt='%d-%m-%Y %H:%M:%S',
+                    level=logging.INFO)
+
     dataset_path = "3-DoubleCrossValidation/data"
     dataset = Dataset_Builder(dataset_path=dataset_path)\
                 .with_sampling_rate(125)\
