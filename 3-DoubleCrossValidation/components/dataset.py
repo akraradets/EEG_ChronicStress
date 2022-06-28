@@ -11,15 +11,16 @@ class Dataset:
     GROUP_NEUTRAL = 2
     GROUP_STRESSED = 1
 
-    def __init__(self, dataset_path:str, EEG_folder:str="EEG/", PSS_name:str="PSS.csv"): 
+    def __init__(self, dataset_path:str, EEG_folder:str="EEG/", EEG_ext:str=".pickle", PSS_name:str="PSS.csv"): 
         """
             dataset_path: path to the dataset. Inside must have have `EEG` as a folder and `PSS.csv` file.
             EEG_folder: if you want to change the default `EEG` folder to something else.
             PSS_name: if you want to change the default `PSS.csv` filename to something else.
         """
         #### Assert the files ####
-        EEG_path = f"{dataset_path}/{EEG_folder}"
-        PSS_path = f"{dataset_path}/{PSS_name}"
+        
+        EEG_path = os.path.join(dataset_path, EEG_folder)
+        PSS_path = os.path.join(dataset_path, PSS_name)
         assert os.path.exists(EEG_path), f"{EEG_path} does not exist."
         assert os.path.exists(PSS_path), f"{PSS_path} does not exist."
 
@@ -34,7 +35,7 @@ class Dataset:
         for index in PSS.index:
             name = f"{index:03d}"
             self.names.append(f"{name}")
-            file = f"{EEG_path}{name}.pickle"
+            file = os.path.join(EEG_path, f"{name}{EEG_ext}")
             assert os.path.exists(file), f"{file} is not exist."
             assert file not in self.files, f"{name} is duplicated."
             self.files.append(file)
@@ -178,10 +179,10 @@ class Dataset:
     
 
 class Dataset_Builder:
-    def __init__(self, dataset_path:str, EEG_folder:str="EEG/", PSS_name:str="PSS.csv"):
+    def __init__(self, dataset_path:str, EEG_folder:str="EEG/", EEG_ext:str=".pickle", PSS_name:str="PSS.csv"):
         self.is_sampling_rate_set = False
         self.is_marker_set = False
-        self.dataset = Dataset(dataset_path=dataset_path, EEG_folder=EEG_folder, PSS_name=PSS_name)
+        self.dataset = Dataset(dataset_path=dataset_path, EEG_folder=EEG_folder, EEG_ext=EEG_ext, PSS_name=PSS_name)
     
     def with_sampling_rate(self, sampling_rate:int=125) -> Dataset_Builder:
         self.dataset.set_sampling_rate(sampling_rate)

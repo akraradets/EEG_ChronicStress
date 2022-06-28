@@ -10,11 +10,6 @@ import os
 import re
 from typing import List
 
-def _check_is_done(filename:str) -> bool:
-    if(os.path.exists(filename)):
-        return True
-    return False
-
 def get_10_cv(file_path:str) -> List[str]:
     lines = []
     with open(file_path, 'r') as f:
@@ -52,8 +47,9 @@ def train_model(X:np.ndarray, y:np.ndarray, groups:np.ndarray, cv_result_prefix:
     n_split_outter = 10
     cv_outter = StratifiedGroupKFold(n_splits=n_split_outter, shuffle=False)
     accs = get_accs(get_logger_filename('ml'))
-    if(len(accs) == 10): 
-        return np.array(accs)
+    # if(len(accs) == 10): 
+        # return np.array(accs)
+    accs=[]
 
     logger.info(f"X.shape={X.shape}, y.shape={y.shape}, groups.shape={groups.shape}")
     for epoch, (idxs_train, idxs_test) in enumerate(cv_outter.split(X,y,groups)):

@@ -2,6 +2,7 @@
 # https://towardsdatascience.com/normality-tests-in-python-31e04aa4f411
 
 from scipy.stats import shapiro, normaltest, anderson
+from scipy.stats import mannwhitneyu
 import numpy as np
 import logging
 
@@ -33,21 +34,9 @@ def _test_normaltest(column:np.ndarray) -> bool:
         return True
     return False
 
-# def _test_anderson(column:np.ndarray) -> bool:
-#     # Anderson-Darling Test is a statistical test that can be used to evaluate whether a 
-#     # data sample comes from one of among many known data samples, named for Theodore Anderson and Donald Darling.
-#     # 
-#     # It can be used to check whether a data sample is normal. The test is a modified version 
-#     # of a more sophisticated nonparametric goodness-of-fit statistical test called the `Kolmogorov-Smirnov` test.
-
-#     result = anderson(column)
-#     p = 0
-#     for i in range(len(result.critical_values)):
-#         sl, cv = result.significance_level[i], result.critical_values[i]
-#         if result.statistic < result.critical_values[i]:
-#             print('%.3f: %.3f, data looks normal (fail to reject H0)' % (sl, cv))
-#         else:
-# 	    	print('%.3f: %.3f, data does not look normal (reject H0)' % (sl, cv))
-#     # logger.info(f'{i:3d}:shapiro:Sample looks Gaussian (fail to reject H0)')
-#     # # else:
-#     # #     print('Sample does not look Gaussian (reject H0)')
+def rank_mannwhitneyu(data:np.ndarray, labels:np.ndarray) -> np.ndarray:
+    p_values = []
+    for i in range(133):
+        result = mannwhitneyu(data[labels == 0, i], data[labels == 1, i])
+        p_values.append(result.pvalue)
+    return np.array(p_values)

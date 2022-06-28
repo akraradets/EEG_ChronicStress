@@ -1,22 +1,54 @@
 from mne_features.feature_extraction import FeatureExtractor, extract_features
+from sklearn.preprocessing import StandardScaler
+from scipy.signal import welch
+from scipy.integrate import simps
 import numpy as np
 import logging
 import pprint
 import os
 
-def preprocessing(data:np.ndarray, sampling_rate:int) -> np.ndarray:
+def preprocessing(data:np.ndarray, sampling_rate:int, bands:dict, log10:bool) -> np.ndarray:
     logger = logging.getLogger('main')
-    data = PSD(data=data, sampling_rate=sampling_rate)
+    data = PSD(data=data, sampling_rate=sampling_rate, bands=bands)
     data = relative(data=data)
+    if(log10):
+        data = 10 * np.log10(data)
+    assert np.isnan(data).any() == False
     data = asymetries(data=data)
+    # Upon testing, this StandardScaler will apply (X_i - Mu_i) / std_i for each i (column/feature) individually
+    scaler = StandardScaler()
+    data = scaler.fit_transform(data)
+    assert np.isnan(data).any() == False
     return data
 
-def PSD(data:np.ndarray,  sampling_rate:int) -> np.ndarray:
+
+def PSD(data:np.ndarray, sampling_rate:int, bands:dict) -> np.ndarray:
+    logger = logging.getLogger('main')
+    # https://raphaelvallat.com/bandpower.html
+
+    # Compute the modified periodogram (Welch)
+    freqs, psds = welch(x=data, fs=sampling_rate, nperseg=sampling_rate * 2) # psd has a unit of V^2/Hz
+    # logger.info(f"{freqs.shape=}|{psds.shape=}")
+    temp = []
+    for name, (low, high) in bands.items():
+        idx_band = np.logical_and(freqs >= low, freqs <= high)
+        band_power = simps(psds[:,:,idx_band], dx=freqs[1] - freqs[0]) # band_power has a unit of V^2
+        # logger.info(f"{band_power.shape=}")
+        temp.append(band_power)
+
+    temp = np.hstack(temp)
+    assert (temp == abs(temp)).all()
+    assert np.isnan(temp).any() == False
+    assert temp.shape[1] == (16 * 7), f"The second dimension should be (16 * 7). {temp.shape=}"
+    return temp
+
+
+def PSD_old(data:np.ndarray,  sampling_rate:int) -> np.ndarray:
     logger = logging.getLogger('main')
     # [alias_feature_function]__[optional_param]
     params = {
-        'pow_freq_bands__log':True,
-        'pow_freq_bands__normalize':True,
+        'pow_freq_bands__log':False,
+        'pow_freq_bands__normalize':False,
         'pow_freq_bands__psd_method':'welch',
         'pow_freq_bands__freq_bands':{
             'delta': [1,3],
@@ -55,6 +87,7 @@ def relative(data:np.ndarray) -> np.ndarray:
     # relative = ratio of gamma to slow = gamma / slow
     relatives = gammas / slows
     data = np.hstack([data, relatives])
+    assert np.isnan(data).any() == False
     assert data.shape[1] == (16 * 8), f"The second dimension should be (16 * 8). {data.shape=}"
     return data
 
@@ -84,6 +117,7 @@ def asymetries(data:np.ndarray) -> np.ndarray:
     # 25-06-2022 18:24:51|preprocessing.py:73|INFO|data.shape=(420, 128), alpha_f.shape=(420,), alpha_t.shape=(420,), alpha_a.shape=(420,), beta_f.shape=(420,), beta_t.shape=(420,)
     logger.info(f"{data.shape=}, {alpha_f.shape=}, {alpha_t.shape=}, {alpha_a.shape=}, {beta_f.shape=}, {beta_t.shape=}")
     data = np.hstack([data, alpha_f, alpha_t, alpha_a, beta_f, beta_t])
+    assert np.isnan(data).any() == False
     assert data.shape[1] == (16 * 8) + 5, f"The second dimension should be (16*8)+5=133. {data.shape=}"
     return data
 
@@ -97,4 +131,4 @@ def _get_index(ch_name:str = None, band_name:str = None) -> int: # type : ignore
     elif(ch_name == None):
         return band_names.index(band_name)
     else:
-        return ch_names.index(ch_name) * band_names.index(band_name)
+        return ch_names.index(ch_name) + (band_names.index(band_name) * 16)

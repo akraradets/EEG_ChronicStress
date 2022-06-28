@@ -23,11 +23,9 @@ def load_cache(path:str, filename:str='data.pickle'):
 
 def clear_cache(path:str, filename:str=None): # type: ignore
     if(filename == None):
-        file_paths = glob.glob(os.path.join(path, "*.pickle"))
+        file_paths = glob.glob(os.path.join(path, "*"))
     else:
         file_paths = [os.path.join(path, filename)]
     
     for file_path in file_paths:
         os.remove(file_path)
-        logger = logging.getLogger('main-logger')
-        logger.info(f"cache:{file_path} is removed.")
