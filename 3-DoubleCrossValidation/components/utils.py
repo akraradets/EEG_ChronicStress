@@ -2,6 +2,7 @@ import pickle
 import os
 import glob
 import logging
+from pathlib import Path
 
 def save_cache(data:object, path:str, filename:str='data.pickle'):
     if(os.path.exists(path) == False):
@@ -23,9 +24,10 @@ def load_cache(path:str, filename:str='data.pickle'):
 
 def clear_cache(path:str, filename:str=None): # type: ignore
     if(filename == None):
+        # Path(path).rmdir()
+        # os.mkdir(path)
         file_paths = glob.glob(os.path.join(path, "*"))
     else:
         file_paths = [os.path.join(path, filename)]
-    
     for file_path in file_paths:
         os.remove(file_path)

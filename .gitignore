@@ -141,4 +141,6 @@ fmri
 3-DoubleCrossValidation/data/*
 cache/*
 cv_results/*
+selection/**/*.csv
+log/*
 !.keep
