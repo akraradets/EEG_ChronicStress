@@ -128,13 +128,13 @@ if __name__ == "__main__":
     # p_values = rank_mannwhitneyu(data, labels)
     #### 4. TRAIN MODEL ####
     # ranked = p_values.argsort()
-    names = []
-    # for i in range(15):
-    for i in range(data.shape[0]):
-        cv_scores = train_model(X=data[:,:i+1], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
-        logger.info(f"{i+1}|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")
-        names.append(feature_names[i])
-        logger.info(names)
+    # names = []
+    # # for i in range(15):
+    # for i in range(data.shape[0]):
+    #     cv_scores = train_model(X=data[:,:i+1], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
+    #     logger.info(f"{i+1}|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")
+    #     names.append(feature_names[i])
+    #     logger.info(names)
 
     # cv_scores = train_model(X=data[:,], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
     # logger.info(f"all|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")

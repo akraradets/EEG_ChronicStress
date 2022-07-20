@@ -142,5 +142,6 @@ fmri
 cache/*
 cv_results/*
 selection/**/*.csv
-log/*
+selection/**/*.pickle
+!selection/**/rank.pickle
 !.keep
