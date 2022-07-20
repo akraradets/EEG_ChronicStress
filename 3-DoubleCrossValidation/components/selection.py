@@ -21,11 +21,13 @@ def forward_selection(data:np.ndarray, labels:np.ndarray, groups:np.ndarray, cv_
         raise e
 
     # selecting 25 features
-    for i in range(len(rank), data.shape[1]):
+    count = len(rank)
+    while count < 25:
         new_feature = _forward_selection_next_feature(rank, data, labels, groups, cv_result_prefix)
         rank.append(new_feature)
-        save_cache(data=rank, path=path_cache, filename=f"{i}.pickle")
+        save_cache(data=rank, path=path_cache, filename=f"{count}.pickle")
         save_cache(data=rank, path=path_cache, filename=f"rank.pickle")
+    return rank
 
 
 def _forward_selection_next_feature(base_feature:list, data:np.ndarray, labels:np.ndarray, groups:np.ndarray, cv_result_prefix:str="selection") -> int:

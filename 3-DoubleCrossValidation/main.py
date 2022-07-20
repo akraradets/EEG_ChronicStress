@@ -117,24 +117,24 @@ if __name__ == "__main__":
         raise e
 
     logger.info(f"{data.shape=}|{labels.shape=}|{groups.shape=}")
+    feature_names = get_feature_name()
 
     #### 3. STATISTICAL TEST ####
     is_normals = check_normality(data)
-    feature_names = get_feature_name()
 
     #### 4. FEATURE SELECTION ####
-    forward_selection(data=data, labels=labels, groups=groups, cv_result_prefix=f"selection/{config_string}")
+    rank = forward_selection(data=data, labels=labels, groups=groups, cv_result_prefix=f"selection/{config_string}")
 
     # p_values = rank_mannwhitneyu(data, labels)
     #### 4. TRAIN MODEL ####
     # ranked = p_values.argsort()
-    # names = []
+    names = []
     # # for i in range(15):
-    # for i in range(data.shape[0]):
-    #     cv_scores = train_model(X=data[:,:i+1], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
-    #     logger.info(f"{i+1}|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")
-    #     names.append(feature_names[i])
-    #     logger.info(names)
+    for i in range(data.shape[0]):
+        cv_scores = train_model(X=data[:,:i+1], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
+        logger.info(f"{i+1}|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")
+        names.append(feature_names[i])
+        logger.info(names)
 
     # cv_scores = train_model(X=data[:,], y=labels, groups=groups, cv_result_prefix=f"cv_results/{config_string}")
     # logger.info(f"all|10-CV={format(  round(cv_scores.mean(),5), '.5f')}|STD={format(  round(cv_scores.std(),5), '.5f')}")
